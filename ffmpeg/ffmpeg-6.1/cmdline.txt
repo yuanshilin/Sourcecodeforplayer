@@ -1,0 +1,35 @@
+1  avs2 avs3解码：
+依赖库：libASAVS2Vid.so libdavs3.so libVMFPlatForm.so
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig
+check
+pkg-config --exists --print-errors x264
+pkg-config --exists --print-errors x265
+
+编译命令： --enable-libarcdavs2 --enable-libarcdavs3
+./configure  --pkg-config-flags="--static" --extra-cflags="-DX265_DEPTH=10" --extra-libs="-lpthread -lm"  --ld="g++" --enable-gpl  --enable-libx265 --enable-libx264   --enable-libarcdavs2 --enable-libarcdavs3   --prefix=/mnt/data/local-disk2/ljin/ffmpeg-test1/
+
+使用命令： ./ffmpeg -i arcvideo_4s_avs2_3840_2160_10bit.ts  out.yuv -v debug  //ts转yuv
+                 ./ffmpeg -i 8K-AVS3-420_huaxue_8s.ts out.yuv
+                ./ffmpeg -i 8K_AVS3_noAudioVivid_2s.mp4 out.yuv
+
+2  hdr vivid render:
+依赖库： libArcHDRCUVA.so  libArcVAlgorithm.so  
+
+编译命令：   --enable-libArcHDRCUVA
+./configure  --pkg-config-flags="--static" --extra-cflags="-DX265_DEPTH=10" --extra-libs="-lpthread -lm -lArcHDRCUVA -lVMFPlatForm"  --ld="g++" --enable-gpl  --enable-libx265 --enable-libx264   --enable-libarcdavs2 --enable-libarcdavs3 --enable-libArcHDRCUVA  --prefix=/mnt/data/local-disk2/ljin/ffmpeg-test1/
+export LD_LIBRARY_PATH=$:/usr/local/lib/
+make -j8
+make install
+
+hdr vivid filter使用命令：
+./ffmpeg -i vivid_2s.mp4 -vf arcdtransfer=transfer=pq:displaylight=1000:deviceid=0:highpointmode=0  -pix_fmt yuv420p10le  vvv.yuv -v debug
+support HLG->PQ PQ->HLG  HLG/PQ->SDR  输入： yuv422p10  yuv420p10  nv12p10      输出：yuv420p10
+
+
+3  audio vivid:
+依赖库: libav3a_binaural_render.so    libAVS3AudioDec.so  model.bin 
+编译命令 ： --enable-libarcdav3a  --extra-ldflags=-ldl
+./configure  --extra-libs="-lpthread -lm"  --extra-ldflags=-ldl  --ld="g++" --enable-gpl  --enable-libarcdav3a  --prefix=/mnt/data/local-disk1/ljin/ffmpeg-test1/
+
+使用命令：MP4转pcm:
+./ffmpeg -i mp4-audiovivid.mp4  -vn -f s16le out.pcm//audio vivid演示用MP4
