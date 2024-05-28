@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1433
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "avs3Encoder", "avs3Encoder\avs3Encoder.vcxproj", "{AF3427C6-7DF0-4445-83AF-A6C4F6F3937C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libavs3_debug", "libavs3_debug\libavs3_debug.vcxitems", "{D8BEC45B-8526-4203-8770-030CFC03706E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "avs3Decoder", "avs3Decoder\avs3Decoder.vcxproj", "{F9AF773E-E061-44FD-9D76-31B51A0FB46C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libavs3_common", "libavs3_common\libavs3_common.vcxitems", "{0AA519AE-688E-4BB8-A367-7006AC8959FB}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		libavs3_common\libavs3_common.vcxitems*{0aa519ae-688e-4bb8-a367-7006ac8959fb}*SharedItemsImports = 9
+		libavs3_common\libavs3_common.vcxitems*{af3427c6-7df0-4445-83af-a6c4f6f3937c}*SharedItemsImports = 4
+		libavs3_debug\libavs3_debug.vcxitems*{af3427c6-7df0-4445-83af-a6c4f6f3937c}*SharedItemsImports = 4
+		libavs3_debug\libavs3_debug.vcxitems*{d8bec45b-8526-4203-8770-030cfc03706e}*SharedItemsImports = 9
+		libavs3_common\libavs3_common.vcxitems*{f9af773e-e061-44fd-9d76-31b51a0fb46c}*SharedItemsImports = 4
+		libavs3_debug\libavs3_debug.vcxitems*{f9af773e-e061-44fd-9d76-31b51a0fb46c}*SharedItemsImports = 4
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF3427C6-7DF0-4445-83AF-A6C4F6F3937C}.Debug|x64.ActiveCfg = Debug|x64
+		{AF3427C6-7DF0-4445-83AF-A6C4F6F3937C}.Debug|x64.Build.0 = Debug|x64
+		{AF3427C6-7DF0-4445-83AF-A6C4F6F3937C}.Debug|x86.ActiveCfg = Debug|Win32
+		{AF3427C6-7DF0-4445-83AF-A6C4F6F3937C}.Debug|x86.Build.0 = Debug|Win32
+		{AF3427C6-7DF0-4445-83AF-A6C4F6F3937C}.Release|x64.ActiveCfg = Release|x64
+		{AF3427C6-7DF0-4445-83AF-A6C4F6F3937C}.Release|x64.Build.0 = Release|x64
+		{AF3427C6-7DF0-4445-83AF-A6C4F6F3937C}.Release|x86.ActiveCfg = Release|Win32
+		{AF3427C6-7DF0-4445-83AF-A6C4F6F3937C}.Release|x86.Build.0 = Release|Win32
+		{F9AF773E-E061-44FD-9D76-31B51A0FB46C}.Debug|x64.ActiveCfg = Debug|x64
+		{F9AF773E-E061-44FD-9D76-31B51A0FB46C}.Debug|x64.Build.0 = Debug|x64
+		{F9AF773E-E061-44FD-9D76-31B51A0FB46C}.Debug|x86.ActiveCfg = Debug|Win32
+		{F9AF773E-E061-44FD-9D76-31B51A0FB46C}.Debug|x86.Build.0 = Debug|Win32
+		{F9AF773E-E061-44FD-9D76-31B51A0FB46C}.Release|x64.ActiveCfg = Release|x64
+		{F9AF773E-E061-44FD-9D76-31B51A0FB46C}.Release|x64.Build.0 = Release|x64
+		{F9AF773E-E061-44FD-9D76-31B51A0FB46C}.Release|x86.ActiveCfg = Release|Win32
+		{F9AF773E-E061-44FD-9D76-31B51A0FB46C}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {255BF14F-0DA7-44E9-9FDE-97F21A876591}
+	EndGlobalSection
+EndGlobal

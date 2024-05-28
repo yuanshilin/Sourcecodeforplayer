@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{0aa519ae-688e-4bb8-a367-7006ac8959fb}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)avs3_cnst_com.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)avs3_const_meta.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)avs3_dec_lib.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)avs3_options.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)avs3_prot_com.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)avs3_rom_com.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)avs3_stat_com.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)avs3_stat_meta.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)activation_func.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)avs3_com.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)avs3_hoa_com.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)avs3_mc_com.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)avs3_rom_com.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)avs3_stereo_com.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)bwe_com.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)bwe_dec.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)cnn_layer.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fd_spectrum_shaping_com.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fd_spectrum_shaping_dec.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fft.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)latent_quant.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)load_free_model.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)lsf_dec.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)mcr_com.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)mdct.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)mdct_dequant_decode.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)mdct_quant_encode.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)noise_filling.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)range_coder.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tns.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tools.c" />
+  </ItemGroup>
+</Project>
