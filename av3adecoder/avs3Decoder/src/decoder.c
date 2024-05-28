@@ -9,6 +9,9 @@
 #include <time.h>
 #include "avs3_decoder_interface.h"
 #include "avs3_dec_lib.h"
+#include <string.h>
+#include <math.h>
+#include "avs3_prot_com.h"
 
 // #define PROF_ON
 #ifdef PROF_ON
@@ -598,6 +601,7 @@ int parse_header(AVS3DecoderHandle hAvs3Dec, unsigned char* pData, int nLenIn, i
 
 	uint32_t bytesFrame = (uint32_t)(ceil((float)hAvs3Dec->bitsPerFrame / 8));
 	uint32_t bytesHeader = (uint32_t)(ceil((float)hAvs3Dec->bitsHeader / 8));
+#if 0
 	if (pos + bytesFrame + bytesHeader > nLenIn)
 	{
 		if (pnLenConsumed)
@@ -619,7 +623,7 @@ int parse_header(AVS3DecoderHandle hAvs3Dec, unsigned char* pData, int nLenIn, i
 		LOGD("%p, crc error.", hAvs3Dec);
 		return AVS3_FALSE;
 	}
-
+#endif
 
 	// 	if (pnLenConsumed)
 	// 		*pnLenConsumed -= MAX_NBYTES_FRAME_HEADER;

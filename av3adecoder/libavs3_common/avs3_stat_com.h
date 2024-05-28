@@ -2,6 +2,7 @@
 #define AVS3_STAT_COM_H
 
 #include <stdint.h>
+#include <string.h>
 
 #include "avs3_options.h"
 #include "avs3_cnst_com.h"

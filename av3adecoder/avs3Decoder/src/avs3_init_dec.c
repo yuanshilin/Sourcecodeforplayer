@@ -22,6 +22,8 @@
 
 #include "model.h"
 
+void DecryterCube(char *ptxData, int len);
+
 static void InitDecoderCore(
     AVS3_DEC_CORE_HANDLE hDecCore, 
     const short frameLength,
