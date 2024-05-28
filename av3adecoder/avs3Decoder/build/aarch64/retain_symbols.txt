@@ -1,0 +1,13 @@
+VERSION_AVS3AudioDec_1_0_0_6
+GetAvs3DecoderCommandLine
+Avs3InitDecoder
+ReadBitstream
+Avs3Decode
+ResetBitstream
+WriteSynthData
+SynthWavHeader
+Avs3DecoderDestroy
+parse_header
+avs3_create_decoder
+avs3_decode
+avs3_destroy_decoder

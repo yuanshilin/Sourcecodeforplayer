@@ -1,0 +1,350 @@
+﻿  VisualGDB: Run "make -f AVS3AudioDec.mk" in directory "/mnt/data/remote/yfxu_coding/CommonLibs/ExternSdk/AudioVivid/trunk/avs3Decoder/build/linux/" on root@172.17.230.73:60112 (SSH)
+  
+  checking dependencies
+  
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../src/decoder.o -c ../../src/decoder.c
+  ../../src/decoder.c: In function ‘main’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\decoder.c(54,11): warning : variable ‘numChansOutput’ set but not used [-Wunused-but-set-variable]
+       short numChansOutput;
+             ^
+  ../../src/decoder.c: In function ‘parse_header’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\decoder.c(214,2): warning : implicit declaration of function ‘memcpy’ [-Wimplicit-function-declaration]
+    memcpy(headerBs, pData, MAX_NBYTES_FRAME_HEADER);
+    ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\decoder.c(214,2): warning : incompatible implicit declaration of built-in function ‘memcpy’ [enabled by default]
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\decoder.c(358,2): warning : implicit declaration of function ‘ceil’ [-Wimplicit-function-declaration]
+    uint32_t headerBsBytes = (uint32_t)(ceil((float)nextBitPos / 8));
+    ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\decoder.c(358,38): warning : incompatible implicit declaration of built-in function ‘ceil’ [enabled by default]
+    uint32_t headerBsBytes = (uint32_t)(ceil((float)nextBitPos / 8));
+                                        ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\decoder.c(376,2): warning : implicit declaration of function ‘GetFrameLength’ [-Wimplicit-function-declaration]
+    hAvs3Dec->frameLength = GetFrameLength(hAvs3Dec->outputFs);
+    ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\decoder.c(662,2): warning : implicit declaration of function ‘Crc16’ [-Wimplicit-function-declaration]
+    crcResult = Crc16(pData + pos + bytesHeader, bytesFrame);
+    ^
+  ../../src/decoder.c: In function ‘avs3_decode’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\decoder.c(704,29): warning : incompatible implicit declaration of built-in function ‘ceil’ [enabled by default]
+    bytesPerFrame = (uint32_t)(ceil((float)hAvs3Dec->bitsPerFrame / 8));
+                               ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\decoder.c(710,2): warning : incompatible implicit declaration of built-in function ‘memcpy’ [enabled by default]
+    memcpy(bitstream, pDataIN, bytesPerFrame);
+    ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\decoder.c(684,18): warning : unused variable ‘crcResult’ [-Wunused-variable]
+    uint16_t crcBs, crcResult;          // crc info from BS and calculated at decoder
+                    ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\decoder.c(684,11): warning : unused variable ‘crcBs’ [-Wunused-variable]
+    uint16_t crcBs, crcResult;          // crc info from BS and calculated at decoder
+             ^
+  ../../src/decoder.c: In function ‘parse_header’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\decoder.c(494,33): warning : ‘channelNumIdx’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+      hAvs3Dec->channelNumConfig = (ChannelNumConfig)channelNumIdx;
+                                   ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\decoder.c(497,93): warning : ‘bitrateIdxBedMc’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+      hAvs3Dec->bitrateBedMc = codecBitrateConfigTable[hAvs3Dec->channelNumConfig].bitrateTable[bitrateIdxBedMc];
+                                                                                               ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\decoder.c(510,87): warning : ‘bitrateIdxPerObj’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+      hAvs3Dec->bitratePerObj = codecBitrateConfigTable[CHANNEL_CONFIG_MONO].bitrateTable[bitrateIdxPerObj];
+                                                                                         ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\decoder.c(457,26): warning : ‘soundBedType’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+     hAvs3Dec->soundBedType = soundBedType;
+                            ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\decoder.c(513,29): warning : ‘numObjs’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+      hAvs3Dec->numChansOutput += hAvs3Dec->numObjsOutput;
+                               ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\decoder.c(569,92): warning : ‘bitrateIdx’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+     hAvs3Dec->totalBitrate = codecBitrateConfigTable[hAvs3Dec->channelNumConfig].bitrateTable[bitrateIdx];
+                                                                                              ^
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../src/avs3_write_wav.o -c ../../src/avs3_write_wav.c
+  ../../src/avs3_write_wav.c: In function ‘WriteWavHeader’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_write_wav.c(14,5): warning : pointer targets in passing argument 1 of ‘__builtin_strncpy’ differ in signedness [-Wpointer-sign]
+       strncpy(wavHeader.chunkID, "RIFF", sizeof(wavHeader.chunkID));
+       ^
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_write_wav.c(14,5): note :  expected ‘char *’ but argument is of type ‘int8_t *’
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_write_wav.c(20,5): warning : pointer targets in passing argument 1 of ‘__builtin_strncpy’ differ in signedness [-Wpointer-sign]
+       strncpy(wavHeader.format, "WAVE", sizeof(wavHeader.format));
+       ^
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_write_wav.c(20,5): note :  expected ‘char *’ but argument is of type ‘int8_t *’
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_write_wav.c(23,5): warning : pointer targets in passing argument 1 of ‘__builtin_strncpy’ differ in signedness [-Wpointer-sign]
+       strncpy(wavHeader.subchunkID, "fmt ", sizeof(wavHeader.subchunkID));
+       ^
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_write_wav.c(23,5): note :  expected ‘char *’ but argument is of type ‘int8_t *’
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_write_wav.c(47,5): warning : pointer targets in passing argument 1 of ‘__builtin_strncpy’ differ in signedness [-Wpointer-sign]
+       strncpy(wavHeader.dataID, "data", sizeof(wavHeader.dataID));
+       ^
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_write_wav.c(47,5): note :  expected ‘char *’ but argument is of type ‘int8_t *’
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../src/avs3_dec.o -c ../../src/avs3_dec.c
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\include\Version.h(2):
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_dec.c(6):
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\Instruction.h(139,46): warning : backslash-newline at end of file [enabled by default]
+   #define WRITE_PIXELS(dst, a, b, c, srcshift) \
+   ^
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../src/avs3_stereo_dec.o -c ../../src/avs3_stereo_dec.c
+  ../../src/avs3_stereo_dec.c: In function ‘Avs3StereoDec’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_stereo_dec.c(20,11): warning : unused variable ‘availableBytes’ [-Wunused-variable]
+       short availableBytes = 0;
+             ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_stereo_dec.c(18,11): warning : unused variable ‘totalBits’ [-Wunused-variable]
+       short totalBits = 0;
+             ^
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../src/avs3_io_dec.o -c ../../src/avs3_io_dec.c
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../src/avs3_mc_dec.o -c ../../src/avs3_mc_dec.c
+  ../../src/avs3_mc_dec.c: In function ‘Avs3McDec’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_mc_dec.c(23,11): warning : variable ‘availableBytes’ set but not used [-Wunused-but-set-variable]
+       short availableBytes = 0;
+             ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_mc_dec.c(17,11): warning : unused variable ‘totalBits’ [-Wunused-variable]
+       short totalBits = 0;
+             ^
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../src/avs3_hoa_dec.o -c ../../src/avs3_hoa_dec.c
+  ../../src/avs3_hoa_dec.c: In function ‘Avs3HoaDec’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_hoa_dec.c(117,17): warning : ‘ch2’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+               ch2 += groupChOffset;
+                   ^
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_hoa_dec.c(97,23): note :  ‘ch2’ was declared here
+       short i, ch, ch1, ch2, groupIdx;
+                         ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_hoa_dec.c(97,18): warning : ‘ch1’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+       short i, ch, ch1, ch2, groupIdx;
+                    ^
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../src/avs3_mix_dec.o -c ../../src/avs3_mix_dec.c
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../src/avs3_mono_dec.o -c ../../src/avs3_mono_dec.c
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../src/avs3_bitstream_dec.o -c ../../src/avs3_bitstream_dec.c
+  ../../src/avs3_bitstream_dec.c: In function ‘DecodeHoaSideBits’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_bitstream_dec.c(638,11): warning : variable ‘nTotalChans’ set but not used [-Wunused-but-set-variable]
+       short nTotalChans;
+             ^
+  ../../src/avs3_bitstream_dec.c: In function ‘Avs3ParseBsFrameHeader’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_bitstream_dec.c(247,32): warning : ‘soundBedType’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+           hAvs3Dec->soundBedType = soundBedType;
+                                  ^
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../src/avs3_metadata_dec.o -c ../../src/avs3_metadata_dec.c
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../src/avs3_init_dec.o -c ../../src/avs3_init_dec.c
+  ../../src/avs3_init_dec.c: In function ‘Avs3DecCreateHoa’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_init_dec.c(296,35): warning : unused variable ‘hBitstream’ [-Wunused-variable]
+       AVS3_BSTEREAM_DATA_DEC_HANDLE hBitstream = NULL;
+                                     ^
+  ../../src/avs3_init_dec.c: In function ‘Avs3InitDecoder’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_init_dec.c(462,2): warning : implicit declaration of function ‘memcpy’ [-Wimplicit-function-declaration]
+    memcpy(modul.data, g_model, sizeof(modul.data));
+    ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_init_dec.c(462,2): warning : incompatible implicit declaration of built-in function ‘memcpy’ [enabled by default]
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_init_dec.c(464,2): warning : pointer targets in passing argument 1 of ‘DecryterCube’ differ in signedness [-Wpointer-sign]
+    DecryterCube(modul.data, sizeof(modul.data));
+    ^
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\src\avs3_init_dec.c(7):
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\avs3_prot_com.h(282,6): note :  expected ‘char *’ but argument is of type ‘unsigned char *’
+   void DecryterCube(char *ptxData, int len);
+        ^
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/mdct.o -c ../../../libavs3_common/mdct.c
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/load_free_model.o -c ../../../libavs3_common/load_free_model.c
+  ../../../libavs3_common/load_free_model.c: In function ‘InitEncoder’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\load_free_model.c(25,2): warning : implicit declaration of function ‘memcpy’ [-Wimplicit-function-declaration]
+    memcpy(&numLayers, fModel->data + fModel->nIndex, sizeof(int16_t));
+    ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\load_free_model.c(25,2): warning : incompatible implicit declaration of built-in function ‘memcpy’ [enabled by default]
+  ../../../libavs3_common/load_free_model.c: In function ‘InitDecoder’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\load_free_model.c(87,2): warning : incompatible implicit declaration of built-in function ‘memcpy’ [enabled by default]
+    memcpy(&numLayers, fModel->data + fModel->nIndex, sizeof(int16_t));
+    ^
+  ../../../libavs3_common/load_free_model.c: In function ‘InitContextScale’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\load_free_model.c(145,2): warning : incompatible implicit declaration of built-in function ‘memcpy’ [enabled by default]
+    memcpy(numContextScale, fModel->data + fModel->nIndex, sizeof(int16_t));
+    ^
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/cnn_layer.o -c ../../../libavs3_common/cnn_layer.c
+  ../../../libavs3_common/cnn_layer.c: In function ‘InitCnnLayer’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(388,2): warning : implicit declaration of function ‘memcpy’ [-Wimplicit-function-declaration]
+    memcpy(&padding, fModel->data + fModel->nIndex, sizeof(int16_t));
+    ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(388,2): warning : incompatible implicit declaration of built-in function ‘memcpy’ [enabled by default]
+  ../../../libavs3_common/cnn_layer.c: In function ‘Conv1D’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(937,9): warning : passing argument 1 of ‘ApplyLinearActFunc2D’ from incompatible pointer type [enabled by default]
+           ApplyLinearActFunc2D(cnnLayer->featOut, cnnLayer->featDimOut, cnnLayer->numChannelsOut, cnnLayer->featOut);
+           ^
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(8):
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\avs3_prot_com.h(493,6): note :  expected ‘const float **’ but argument is of type ‘float **’
+   void ApplyLinearActFunc2D(
+        ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(940,9): warning : passing argument 1 of ‘ApplyReluActFunc2D’ from incompatible pointer type [enabled by default]
+           ApplyReluActFunc2D(cnnLayer->featOut, cnnLayer->featDimOut, cnnLayer->numChannelsOut, cnnLayer->featOut);
+           ^
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(8):
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\avs3_prot_com.h(480,6): note :  expected ‘const float **’ but argument is of type ‘float **’
+   void ApplyReluActFunc2D(
+        ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(943,9): warning : passing argument 2 of ‘ApplyGdnActFunc’ from incompatible pointer type [enabled by default]
+           ApplyGdnActFunc(cnnLayer->gdnActFuncParam, cnnLayer->featOut, cnnLayer->featDimOut, cnnLayer->numChannelsOut, cnnLayer->featOut);
+           ^
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(8):
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\avs3_prot_com.h(537,6): note :  expected ‘const float **’ but argument is of type ‘float **’
+   void ApplyGdnActFunc(
+        ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(946,9): warning : passing argument 2 of ‘ApplyIgdnActFunc’ from incompatible pointer type [enabled by default]
+           ApplyIgdnActFunc(cnnLayer->gdnActFuncParam, cnnLayer->featOut, cnnLayer->featDimOut, cnnLayer->numChannelsOut, cnnLayer->featOut);
+           ^
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(8):
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\avs3_prot_com.h(545,6): note :  expected ‘const float **’ but argument is of type ‘float **’
+   void ApplyIgdnActFunc(
+        ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(819,13): warning : variable ‘featDimPadded’ set but not used [-Wunused-but-set-variable]
+       int16_t featDimPadded = 0;
+               ^
+  ../../../libavs3_common/cnn_layer.c: In function ‘Conv1DTranspose’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(1104,9): warning : passing argument 1 of ‘ApplyLinearActFunc2D’ from incompatible pointer type [enabled by default]
+           ApplyLinearActFunc2D(cnnLayer->featOut, cnnLayer->featDimOut, cnnLayer->numChannelsOut, cnnLayer->featOut);
+           ^
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(8):
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\avs3_prot_com.h(493,6): note :  expected ‘const float **’ but argument is of type ‘float **’
+   void ApplyLinearActFunc2D(
+        ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(1107,9): warning : passing argument 1 of ‘ApplyReluActFunc2D’ from incompatible pointer type [enabled by default]
+           ApplyReluActFunc2D(cnnLayer->featOut, cnnLayer->featDimOut, cnnLayer->numChannelsOut, cnnLayer->featOut);
+           ^
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(8):
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\avs3_prot_com.h(480,6): note :  expected ‘const float **’ but argument is of type ‘float **’
+   void ApplyReluActFunc2D(
+        ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(1110,9): warning : passing argument 2 of ‘ApplyGdnActFunc’ from incompatible pointer type [enabled by default]
+           ApplyGdnActFunc(cnnLayer->gdnActFuncParam, cnnLayer->featOut, cnnLayer->featDimOut, cnnLayer->numChannelsOut, cnnLayer->featOut);
+           ^
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(8):
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\avs3_prot_com.h(537,6): note :  expected ‘const float **’ but argument is of type ‘float **’
+   void ApplyGdnActFunc(
+        ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(1113,9): warning : passing argument 2 of ‘ApplyIgdnActFunc’ from incompatible pointer type [enabled by default]
+           ApplyIgdnActFunc(cnnLayer->gdnActFuncParam, cnnLayer->featOut, cnnLayer->featDimOut, cnnLayer->numChannelsOut, cnnLayer->featOut);
+           ^
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(8):
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\avs3_prot_com.h(545,6): note :  expected ‘const float **’ but argument is of type ‘float **’
+   void ApplyIgdnActFunc(
+        ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(977,13): warning : variable ‘featDimPadded’ set but not used [-Wunused-but-set-variable]
+       int16_t featDimPadded = 0;
+               ^
+  ../../../libavs3_common/cnn_layer.c: In function ‘Conv1DTranspose2Part’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(1243,9): warning : passing argument 1 of ‘ApplyLinearActFunc2D’ from incompatible pointer type [enabled by default]
+           ApplyLinearActFunc2D(cnnLayer->featOut, cnnLayer->featDimOut, cnnLayer->numChannelsOut, cnnLayer->featOut);
+           ^
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(8):
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\avs3_prot_com.h(493,6): note :  expected ‘const float **’ but argument is of type ‘float **’
+   void ApplyLinearActFunc2D(
+        ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(1246,9): warning : passing argument 1 of ‘ApplyReluActFunc2D’ from incompatible pointer type [enabled by default]
+           ApplyReluActFunc2D(cnnLayer->featOut, cnnLayer->featDimOut, cnnLayer->numChannelsOut, cnnLayer->featOut);
+           ^
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(8):
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\avs3_prot_com.h(480,6): note :  expected ‘const float **’ but argument is of type ‘float **’
+   void ApplyReluActFunc2D(
+        ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(1249,9): warning : passing argument 2 of ‘ApplyGdnActFunc’ from incompatible pointer type [enabled by default]
+           ApplyGdnActFunc(cnnLayer->gdnActFuncParam, cnnLayer->featOut, cnnLayer->featDimOut, cnnLayer->numChannelsOut, cnnLayer->featOut);
+           ^
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(8):
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\avs3_prot_com.h(537,6): note :  expected ‘const float **’ but argument is of type ‘float **’
+   void ApplyGdnActFunc(
+        ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(1252,9): warning : passing argument 2 of ‘ApplyIgdnActFunc’ from incompatible pointer type [enabled by default]
+           ApplyIgdnActFunc(cnnLayer->gdnActFuncParam, cnnLayer->featOut, cnnLayer->featDimOut, cnnLayer->numChannelsOut, cnnLayer->featOut);
+           ^
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(8):
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\avs3_prot_com.h(545,6): note :  expected ‘const float **’ but argument is of type ‘float **’
+   void ApplyIgdnActFunc(
+        ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\cnn_layer.c(1147,13): warning : variable ‘featDimPadded’ set but not used [-Wunused-but-set-variable]
+       int16_t featDimPadded;
+               ^
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/bwe_dec.o -c ../../../libavs3_common/bwe_dec.c
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/tns.o -c ../../../libavs3_common/tns.c
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/noise_filling.o -c ../../../libavs3_common/noise_filling.c
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/avs3_com.o -c ../../../libavs3_common/avs3_com.c
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/mcr_com.o -c ../../../libavs3_common/mcr_com.c
+  ../../../libavs3_common/mcr_com.c: In function ‘McrDecode’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\mcr_com.c(364,13): warning : unused variable ‘vqCbSize’ [-Wunused-variable]
+       int16_t vqCbSize = mcrConfig->vqCbSize[isShortWin];
+               ^
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/avs3_stereo_com.o -c ../../../libavs3_common/avs3_stereo_com.c
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/avs3_mc_com.o -c ../../../libavs3_common/avs3_mc_com.c
+  ../../../libavs3_common/avs3_mc_com.c: In function ‘McBitsAllocationHasSiL’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\avs3_mc_com.c(235,11): warning : unused variable ‘mappingSplitRatio’ [-Wunused-variable]
+       short mappingSplitRatio[MAX_CHANNELS] = { 0 };
+             ^
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/activation_func.o -c ../../../libavs3_common/activation_func.c
+  ../../../libavs3_common/activation_func.c: In function ‘InitGdnParam’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\activation_func.c(203,3): warning : implicit declaration of function ‘memcpy’ [-Wimplicit-function-declaration]
+     memcpy(&beta, fModel->data + fModel->nIndex, sizeof(float));
+     ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\activation_func.c(203,3): warning : incompatible implicit declaration of built-in function ‘memcpy’ [enabled by default]
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\activation_func.c(216,4): warning : incompatible implicit declaration of built-in function ‘memcpy’ [enabled by default]
+      memcpy(&gamma, fModel->data + fModel->nIndex, sizeof(float));
+      ^
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/fft.o -c ../../../libavs3_common/fft.c
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/avs3_hoa_com.o -c ../../../libavs3_common/avs3_hoa_com.c
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/bwe_com.o -c ../../../libavs3_common/bwe_com.c
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/fd_spectrum_shaping_com.o -c ../../../libavs3_common/fd_spectrum_shaping_com.c
+  ../../../libavs3_common/fd_spectrum_shaping_com.c: In function ‘SpectrumShaping’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\fd_spectrum_shaping_com.c(235,14): warning : variable ‘mdctGainLen’ set but not used [-Wunused-but-set-variable]
+       short i, mdctGainLen;
+                ^
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/mdct_dequant_decode.o -c ../../../libavs3_common/mdct_dequant_decode.c
+  ../../../libavs3_common/mdct_dequant_decode.c: In function ‘MdctDequantDecodeVae’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\mdct_dequant_decode.c(121,17): warning : implicit declaration of function ‘Conv1DTranspose2Part’ [-Wimplicit-function-declaration]
+                   Conv1DTranspose2Part(cnnLayer, layerInput);
+                   ^
+  ../../../libavs3_common/mdct_dequant_decode.c: In function ‘MdctDequantDecodeHyperLc’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\mdct_dequant_decode.c(598,23): warning : unused variable ‘baseDecHandle’ [-Wunused-variable]
+       ModelStructHandle baseDecHandle = baseCodecSt->decoderHandle;
+                         ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\mdct_dequant_decode.c(591,13): warning : unused variable ‘baseDecOutput’ [-Wunused-variable]
+       float **baseDecOutput = NULL;                    // base dec model output buffer, no malloc
+               ^
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/avs3_rom_com.o -c ../../../libavs3_common/avs3_rom_com.c
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/tools.o -c ../../../libavs3_common/tools.c
+  E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\tools.c(3):
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\Instruction.h(139,46): warning : backslash-newline at end of file [enabled by default]
+   #define WRITE_PIXELS(dst, a, b, c, srcshift) \
+   ^
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/range_coder.o -c ../../../libavs3_common/range_coder.c
+  ../../../libavs3_common/range_coder.c: In function ‘InitRangeCoderConfig’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\range_coder.c(42,3): warning : implicit declaration of function ‘memcpy’ [-Wimplicit-function-declaration]
+     memcpy(&cdfLength, fModel->data + fModel->nIndex, sizeof(int16_t));
+     ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\range_coder.c(42,3): warning : incompatible implicit declaration of built-in function ‘memcpy’ [enabled by default]
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\range_coder.c(51,3): warning : incompatible implicit declaration of built-in function ‘memcpy’ [enabled by default]
+     memcpy(&rangeCoderConfig->offset[i], fModel->data + fModel->nIndex, sizeof(int16_t));
+     ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\range_coder.c(63,4): warning : incompatible implicit declaration of built-in function ‘memcpy’ [enabled by default]
+      memcpy(&cdfValue, fModel->data + fModel->nIndex, sizeof(int32_t));
+      ^
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/mdct_quant_encode.o -c ../../../libavs3_common/mdct_quant_encode.c
+  ../../../libavs3_common/mdct_quant_encode.c: In function ‘ContextEncDec’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\mdct_quant_encode.c(277,17): warning : implicit declaration of function ‘Conv1DTranspose2Part’ [-Wimplicit-function-declaration]
+                   Conv1DTranspose2Part(cnnLayer, ctxDequantizedLatent);
+                   ^
+  ../../../libavs3_common/mdct_quant_encode.c: In function ‘MdctQuantEncodeHyperLc’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\mdct_quant_encode.c(985,13): warning : variable ‘baseOutput’ set but not used [-Wunused-but-set-variable]
+       float **baseOutput = NULL;                      // pointer to base cnn model output, no malloc
+               ^
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/lsf_dec.o -c ../../../libavs3_common/lsf_dec.c
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/latent_quant.o -c ../../../libavs3_common/latent_quant.c
+  ../../../libavs3_common/latent_quant.c: In function ‘InitQuantizer’:
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\latent_quant.c(38,3): warning : implicit declaration of function ‘memcpy’ [-Wimplicit-function-declaration]
+     memcpy(&tmp, fModel->data + fModel->nIndex, sizeof(float));
+     ^
+E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\linux\\..\..\..\libavs3_common\latent_quant.c(38,3): warning : incompatible implicit declaration of built-in function ‘memcpy’ [enabled by default]
+  /usr/bin/gcc -mavx2 -DSUPPORT_AVX2 -O3 -Wall -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt -fPIC -std=c99 -I../../../libavs3_common/ -I../../../libavs3_debug -I../../include -o ../../../libavs3_common/fd_spectrum_shaping_dec.o -c ../../../libavs3_common/fd_spectrum_shaping_dec.c
+  
+  creating binary "../../../bin/libAVS3AudioDec.so"
+  /usr/bin/ld: ../../../libavs3_debug/avs3_debug.o: Relocations in generic ELF (EM: 40)
+  /usr/bin/ld: ../../../libavs3_debug/avs3_debug.o: Relocations in generic ELF (EM: 40)
+  ../../../libavs3_debug/avs3_debug.o: error adding symbols: File in wrong format
+collect2 : error : ld returned 1 exit status
+  make: *** [bin] Error 1
+  -------------------------------------------------------------
+  Command exited with code 2
+  Executable: make
+  Arguments: -f AVS3AudioDec.mk
+  Directory: /mnt/data/remote/yfxu_coding/CommonLibs/ExternSdk/AudioVivid/trunk/avs3Decoder/build/linux/
+VisualGDB : error : Command-line action failed
+VisualGDB : error : Build has failed. See the Output window for more details.
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.MakeFile.Targets(44,5): error MSB3073: The command ""C:\Program Files (x86)\Sysprogs\VisualGDB\\VisualGDB.exe" /build "E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\avs3Decoder\avs3Decoder.vcxproj" "/solution:E:\Code\svn_dir\Transformer\CommonLibs\ExternSdk\AudioVivid\trunk\avs3Decoder\build\avs3Decoder\avs3Decoder.sln"  "/config:Debug" "/platform:Win32"" exited with code 1.

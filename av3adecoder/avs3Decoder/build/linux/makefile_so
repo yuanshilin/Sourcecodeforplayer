@@ -1,0 +1,24 @@
+CC:=gcc
+SRC_DIRS=../../src
+SRC=$(foreach TMP_SRC_DIRS, $(SRC_DIRS), $(wildcard $(TMP_SRC_DIRS)/*.c)) 
+TARGET=../../bin/libavs3AudioEnc.so
+OBJ:=$(SRC:.c=.o) 
+
+LIB_EXTERN=-L../../lib/  -L../../deps/lib
+INC_EXTERN=-I../../../libavs3_common/ -I../../../libavs3_debug
+  
+INCLUDE=$(INC_EXTERN) -I../../include
+DEP_LIB=-lpthread -lm -ldl -lrt  $(LIB_EXTERN) 
+all:prebuild $(TARGET)
+prebuild:
+	chmod +x *.sh
+#	./prebuild.sh
+$(TARGET):$(OBJ)
+	$(CC) -shared -Wall -g -o  $(TARGET) $(OBJ) $(DEP_LIB);
+	
+%.o:%.c
+	$(CC) -DDEBUG -Wall -g -fPIC -std=c99 $(INCLUDE) -o $@ -c $<
+	
+.PHONY:clean
+clean:
+	-rm -f $(OBJ) $(TARGET)

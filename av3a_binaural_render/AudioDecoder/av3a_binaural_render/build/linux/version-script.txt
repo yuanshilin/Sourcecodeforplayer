@@ -1,0 +1,16 @@
+{
+global:
+CreateRenderer;
+PutInterleavedAudioBuffer;
+GetBinauralInterleavedAudioBuffer;
+UpdateMetadata;
+SetListenerPosition;
+DestroyRenderer;
+local:*;
+};
+
+
+
+
+
+

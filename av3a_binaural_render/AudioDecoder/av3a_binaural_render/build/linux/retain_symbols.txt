@@ -1,0 +1,15 @@
+VERSION_libav3a_binaural_render_1_0_0_1
+CreateRenderer
+PutInterleavedAudioBuffer
+GetBinauralInterleavedAudioBuffer
+UpdateMetadata
+SetListenerPosition
+DestroyRenderer
+
+
+
+
+
+
+
+

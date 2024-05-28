@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Project Name="av3a_binaural_render" InternalType="Console">
+  <Plugins>
+    <Plugin Name="qmake">
+      <![CDATA[00020001N0005Debug0000000000000001N0007Release000000000000]]>
+    </Plugin>
+  </Plugins>
+  <Description/>
+  <Dependencies/>
+  <VirtualDirectory Name="src">
+    <File Name="../../avs3_render.h"/>
+    <File Name="../../avs3_render_creator.h"/>
+    <File Name="../../avs3_stat_meta.h"/>
+    <File Name="../../binaural_render.cpp"/>
+    <File Name="../../binaural_render.h"/>
+    <File Name="../../speaker_definition.hpp"/>
+    <File Name="../../stream_renderer.cpp"/>
+    <File Name="../../stream_renderer.h"/>
+    <File Name="../../adm.cpp"/>
+    <File Name="../../adm.h"/>
+    <File Name="../../metadata.cpp"/>
+    <File Name="../../metadata.h"/>
+    <File Name="../../metadata_parser.cpp"/>
+    <File Name="../../metadata_parser.h"/>
+    <File Name="../../utils.h"/>
+    <File Name="../../xml_parser.cpp"/>
+    <File Name="../../xml_parser.h"/>
+    <File Name="../../avs3_audio.cpp"/>
+    <File Name="../../avs3_audio.h"/>
+    <File Name="../../avs3_audio_types.h"/>
+    <File Name="../../interface.cpp"/>
+    <File Name="../../interface.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="pffft">
+    <File Name="../../ext/pffft/pffft.c"/>
+    <File Name="../../ext/pffft/pffft.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="ambisonics">
+    <File Name="../../ambisonics/SHEval.cpp"/>
+    <File Name="../../ambisonics/SHEval.h"/>
+    <File Name="../../ambisonics/spherical_harmonics.h"/>
+    <File Name="../../ambisonics/spherical_harmonics_constants.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="core">
+    <File Name="../../core/aligned_allocator.h"/>
+    <File Name="../../core/ambisonic_binaural_decoder.cpp"/>
+    <File Name="../../core/ambisonic_binaural_decoder.h"/>
+    <File Name="../../core/ambisonic_encoder.cpp"/>
+    <File Name="../../core/ambisonic_encoder.h"/>
+    <File Name="../../core/ambisonic_rotator.cpp"/>
+    <File Name="../../core/ambisonic_rotator.h"/>
+    <File Name="../../core/definitions.h"/>
+    <File Name="../../core/fft_manager.cpp"/>
+    <File Name="../../core/fft_manager.h"/>
+    <File Name="../../core/listener.cpp"/>
+    <File Name="../../core/listener.h"/>
+    <File Name="../../core/lock_free_thread_safe_object_bank.h"/>
+    <File Name="../../core/logging.h"/>
+    <File Name="../../core/ramp_processor.cpp"/>
+    <File Name="../../core/ramp_processor.h"/>
+    <File Name="../../core/ring_buffer.h"/>
+    <File Name="../../core/sound_source.cpp"/>
+    <File Name="../../core/sound_source.h"/>
+    <File Name="../../core/spherical_harmonic_hrir.cpp"/>
+    <File Name="../../core/spherical_harmonic_hrir.h"/>
+    <File Name="../../core/static_convolver.cpp"/>
+    <File Name="../../core/static_convolver.h"/>
+    <File Name="../../core/utils.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="simd">
+    <File Name="../../ext/simd/simd_macros.h"/>
+    <File Name="../../ext/simd/simd_utils.cc"/>
+    <File Name="../../ext/simd/simd_utils.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="hrtf_database">
+    <File Name="../../ext/hrtf_database/hrtf_assets.h"/>
+    <File Name="../../ext/hrtf_database/hrtf_assets.cpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="libsamplerate">
+    <File Name="../../ext/libsamplerate/Version_script.in"/>
+    <File Name="../../ext/libsamplerate/check_asm.sh"/>
+    <File Name="../../ext/libsamplerate/common.h"/>
+    <File Name="../../ext/libsamplerate/fastest_coeffs.h"/>
+    <File Name="../../ext/libsamplerate/high_qual_coeffs.h"/>
+    <File Name="../../ext/libsamplerate/mid_qual_coeffs.h"/>
+    <File Name="../../ext/libsamplerate/samplerate.c"/>
+    <File Name="../../ext/libsamplerate/samplerate.h"/>
+    <File Name="../../ext/libsamplerate/src_linear.c"/>
+    <File Name="../../ext/libsamplerate/src_sinc.c"/>
+    <File Name="../../ext/libsamplerate/src_zoh.c"/>
+  </VirtualDirectory>
+  <Settings Type="Dynamic Library">
+    <GlobalSettings>
+      <Compiler Options="-std=c++11 -fPIC" C_Options="-fPIC" Assembler="">
+        <IncludePath Value="."/>
+        <IncludePath Value="../../"/>
+        <IncludePath Value="../../../../VMFFramework/include/PlatForm"/>
+        <Preprocessor Value="HAVE_CONFIG_H"/>
+      </Compiler>
+      <Linker Options="-lpthread -Wl,--version-script=version-script.txt -Wl,--retain-symbols-file=retain_symbols.txt">
+        <LibraryPath Value="."/>
+      </Linker>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
+    <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Dynamic Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g;-O0;-Wall" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/lib$(ProjectName).so" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+    <Configuration Name="Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Dynamic Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-O2;-Wall" C_Options="-O2;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/lib$(ProjectName).so" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+  </Settings>
+</CodeLite_Project>

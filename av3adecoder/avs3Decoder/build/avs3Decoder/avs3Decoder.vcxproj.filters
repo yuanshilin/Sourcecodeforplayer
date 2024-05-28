@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source files">
+      <UniqueIdentifier>{f4c94849-5ec6-4e39-abb0-f036fbad34b8}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header files">
+      <UniqueIdentifier>{9a9b856b-5058-4e54-b8cc-d7be07d81211}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource files">
+      <UniqueIdentifier>{bd0680a7-9bce-4936-b1ea-596320f8e9eb}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Source files\avs3Decoder">
+      <UniqueIdentifier>{70888ffe-8c2a-409a-bd4e-1e0dd0d85515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\avs3Decoder\include">
+      <UniqueIdentifier>{7ab2860d-2c0b-4dde-9121-da4a75c0f746}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\avs3Decoder\src">
+      <UniqueIdentifier>{87887bdf-8d09-497b-9335-c0a7050a6d35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\avs3Encoder">
+      <UniqueIdentifier>{ba7343d6-f0c4-4fbe-8fc9-1bf7ceb1c0ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\avs3Encoder\include">
+      <UniqueIdentifier>{791c546e-6148-42d3-8cf3-1b318ba8895c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\avs3Encoder\src">
+      <UniqueIdentifier>{c655611c-5080-49e4-9964-029d52310256}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\libavs3_common">
+      <UniqueIdentifier>{9b7c5777-dacd-44b8-ad94-51d386411043}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\libavs3_debug">
+      <UniqueIdentifier>{aaacf22f-a812-4e59-9509-2eda13bfddcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\avs3Decoder">
+      <UniqueIdentifier>{1cb849f8-0698-4908-833c-d9516588590b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\avs3Decoder\include">
+      <UniqueIdentifier>{780c3692-f97a-452d-a91b-07279a29cce7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\avs3Decoder\src">
+      <UniqueIdentifier>{d9eee68f-9bec-4924-8a6d-a8487c265ad4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\avs3Encoder">
+      <UniqueIdentifier>{c6748372-5a2d-43c1-94d4-6377f7828a5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\avs3Encoder\include">
+      <UniqueIdentifier>{e05551f5-498e-4f4c-ac8f-b602f3e83190}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\avs3Encoder\src">
+      <UniqueIdentifier>{b4ea6a62-96c4-41f3-ab3d-dceb1a9f68bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\libavs3_common">
+      <UniqueIdentifier>{75a312db-603d-415c-b3aa-7a91d95e4352}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\libavs3_debug">
+      <UniqueIdentifier>{7a4da141-c119-4cd8-9099-7df6e6005f16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VisualGDB settings">
+      <UniqueIdentifier>{8d98b328-eae0-49bb-b175-a873132c8530}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\avs3_bitstream_dec.c">
+      <Filter>Source files\avs3Decoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\avs3_dec.c">
+      <Filter>Source files\avs3Decoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\avs3_hoa_dec.c">
+      <Filter>Source files\avs3Decoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\avs3_init_dec.c">
+      <Filter>Source files\avs3Decoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\avs3_io_dec.c">
+      <Filter>Source files\avs3Decoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\avs3_mc_dec.c">
+      <Filter>Source files\avs3Decoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\avs3_metadata_dec.c">
+      <Filter>Source files\avs3Decoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\avs3_mix_dec.c">
+      <Filter>Source files\avs3Decoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\avs3_mono_dec.c">
+      <Filter>Source files\avs3Decoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\avs3_stereo_dec.c">
+      <Filter>Source files\avs3Decoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\avs3_write_wav.c">
+      <Filter>Source files\avs3Decoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\decoder.c">
+      <Filter>Source files\avs3Decoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\avs3Encoder\src\avs3_bitstream_enc.c">
+      <Filter>Source files\avs3Encoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\avs3Encoder\src\avs3_enc.c">
+      <Filter>Source files\avs3Encoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\avs3Encoder\src\avs3_hoa_decomposition.c">
+      <Filter>Source files\avs3Encoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\avs3Encoder\src\avs3_hoa_enc.c">
+      <Filter>Source files\avs3Encoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\avs3Encoder\src\avs3_init_enc.c">
+      <Filter>Source files\avs3Encoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\avs3Encoder\src\avs3_io_enc.c">
+      <Filter>Source files\avs3Encoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\avs3Encoder\src\avs3_mc_enc.c">
+      <Filter>Source files\avs3Encoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\avs3Encoder\src\avs3_metadata_enc.c">
+      <Filter>Source files\avs3Encoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\avs3Encoder\src\avs3_mix_enc.c">
+      <Filter>Source files\avs3Encoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\avs3Encoder\src\avs3_mono_enc.c">
+      <Filter>Source files\avs3Encoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\avs3Encoder\src\avs3_stereo_enc.c">
+      <Filter>Source files\avs3Encoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\avs3Encoder\src\bwe_enc.c">
+      <Filter>Source files\avs3Encoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\avs3Encoder\src\encoder.c">
+      <Filter>Source files\avs3Encoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\avs3Encoder\src\fd_spectrum_shaping_enc.c">
+      <Filter>Source files\avs3Encoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\avs3Encoder\src\lsf_enc.c">
+      <Filter>Source files\avs3Encoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\avs3Encoder\src\signal_analysis.c">
+      <Filter>Source files\avs3Encoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\avs3Encoder\src\windowtype_detect.c">
+      <Filter>Source files\avs3Encoder\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\activation_func.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\avs3_com.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\avs3_hoa_com.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\avs3_mc_com.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\avs3_rom_com.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\avs3_stereo_com.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\bwe_com.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\bwe_dec.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\cnn_layer.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\fd_spectrum_shaping_com.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\fd_spectrum_shaping_dec.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\fft.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\latent_quant.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\load_free_model.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\lsf_dec.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\mcr_com.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\mdct.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\mdct_dequant_decode.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\mdct_quant_encode.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\noise_filling.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\range_coder.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\tns.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_common\tools.c">
+      <Filter>Source files\libavs3_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libavs3_debug\avs3_debug.c">
+      <Filter>Source files\libavs3_debug</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\include\avs3_decoder_interface.h">
+      <Filter>Header files\avs3Decoder\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\avs3_prot_dec.h">
+      <Filter>Header files\avs3Decoder\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\avs3_stat_dec.h">
+      <Filter>Header files\avs3Decoder\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\model.h">
+      <Filter>Header files\avs3Decoder\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Version.h">
+      <Filter>Header files\avs3Decoder\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\avs3Encoder\include\avs3_cnst_enc.h">
+      <Filter>Header files\avs3Encoder\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\avs3Encoder\include\avs3_prot_enc.h">
+      <Filter>Header files\avs3Encoder\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\avs3Encoder\include\avs3_stat_enc.h">
+      <Filter>Header files\avs3Encoder\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\avs3Encoder\include\Version.h">
+      <Filter>Header files\avs3Encoder\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libavs3_common\avs3_cnst_com.h">
+      <Filter>Header files\libavs3_common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libavs3_common\avs3_const_meta.h">
+      <Filter>Header files\libavs3_common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libavs3_common\avs3_options.h">
+      <Filter>Header files\libavs3_common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libavs3_common\avs3_prot_com.h">
+      <Filter>Header files\libavs3_common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libavs3_common\avs3_rom_com.h">
+      <Filter>Header files\libavs3_common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libavs3_common\avs3_stat_com.h">
+      <Filter>Header files\libavs3_common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libavs3_common\avs3_stat_meta.h">
+      <Filter>Header files\libavs3_common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libavs3_common\Instruction.h">
+      <Filter>Header files\libavs3_common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libavs3_debug\avs3_debug.h">
+      <Filter>Header files\libavs3_debug</Filter>
+    </ClInclude>
+    <None Include="avs3Decoder-Debug.vgdbsettings">
+      <Filter>VisualGDB settings</Filter>
+    </None>
+    <None Include="avs3Decoder-Release.vgdbsettings">
+      <Filter>VisualGDB settings</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\linux\AVS3AudioDec.mk">
+      <Filter>Resource files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

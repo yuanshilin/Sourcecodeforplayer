@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{36BF552F-9642-4BFE-9A68-12DA88820DD8}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="VisualGDBPackageDefinitions">
+    <ToolchainID>com.sysprogs.toolchain.default-gcc</ToolchainID>
+  </PropertyGroup>
+  <ImportGroup Label="VisualGDBFindComponents">
+    <Import Project="$(LOCALAPPDATA)\VisualGDB\FindComponents.props" />
+  </ImportGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeIncludeSearchPath>$(LOCALAPPDATA)\VisualGDB\RemoteSourceCache\172.17.230.73\0001\include\c++\4.8.5;$(LOCALAPPDATA)\VisualGDB\RemoteSourceCache\172.17.230.73\0001\include\c++\4.8.5\x86_64-redhat-linux;$(LOCALAPPDATA)\VisualGDB\RemoteSourceCache\172.17.230.73\0001\include\c++\4.8.5\backward;$(LOCALAPPDATA)\VisualGDB\RemoteSourceCache\172.17.230.73\0002\include;$(LOCALAPPDATA)\VisualGDB\RemoteSourceCache\172.17.230.73\0003\include;$(LOCALAPPDATA)\VisualGDB\RemoteSourceCache\172.17.230.73\0001\include;..\..\..\libavs3_common;..\..\include;..\..\src;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeForcedIncludes>$(ProjectDir)\gcc_Debug.h;$(VISUALGDB_DIR)\gcc_compat.h;$(NMakeForcedIncludes)</NMakeForcedIncludes>
+    <NMakeBuildCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /build "$(ProjectPath)" "/solution:$(SolutionPath)"  "/config:$(Configuration)" "/platform:$(Platform)"</NMakeBuildCommandLine>
+    <NMakeCleanCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /clean "$(ProjectPath)" "/solution:$(SolutionPath)"  "/config:$(Configuration)" "/platform:$(Platform)"</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /rebuild "$(ProjectPath)" "/solution:$(SolutionPath)"  "/config:$(Configuration)" "/platform:$(Platform)"</NMakeReBuildCommandLine>
+    <NMakeOutput>$(ProjectDir)avs3Encoder-Debug.vgdbsettings</NMakeOutput>
+    <IncludePath />
+    <ReferencePath />
+    <LibraryPath />
+    <NMakePreprocessorDefinitions>__VisualGDB_CFG_Debug;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeIncludeSearchPath>$(LOCALAPPDATA)\VisualGDB\RemoteSourceCache\172.17.230.73\0001\include\c++\4.8.5;$(LOCALAPPDATA)\VisualGDB\RemoteSourceCache\172.17.230.73\0001\include\c++\4.8.5\x86_64-redhat-linux;$(LOCALAPPDATA)\VisualGDB\RemoteSourceCache\172.17.230.73\0001\include\c++\4.8.5\backward;$(LOCALAPPDATA)\VisualGDB\RemoteSourceCache\172.17.230.73\0002\include;$(LOCALAPPDATA)\VisualGDB\RemoteSourceCache\172.17.230.73\0003\include;$(LOCALAPPDATA)\VisualGDB\RemoteSourceCache\172.17.230.73\0001\include;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeForcedIncludes>$(ProjectDir)\gcc_Release.h;$(VISUALGDB_DIR)\gcc_compat.h;$(NMakeForcedIncludes)</NMakeForcedIncludes>
+    <NMakePreprocessorDefinitions>__VisualGDB_CFG_Release;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeBuildCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /build "$(ProjectPath)" "/solution:$(SolutionPath)"  "/config:$(Configuration)" "/platform:$(Platform)"</NMakeBuildCommandLine>
+    <NMakeCleanCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /clean "$(ProjectPath)" "/solution:$(SolutionPath)"  "/config:$(Configuration)" "/platform:$(Platform)"</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /rebuild "$(ProjectPath)" "/solution:$(SolutionPath)"  "/config:$(Configuration)" "/platform:$(Platform)"</NMakeReBuildCommandLine>
+    <NMakeOutput>$(ProjectDir)avs3Encoder-Release.vgdbsettings</NMakeOutput>
+    <IncludePath />
+    <ReferencePath />
+    <LibraryPath />
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\avs3Decoder\src\avs3_bitstream_dec.c" />
+    <ClCompile Include="..\..\..\avs3Decoder\src\avs3_dec.c" />
+    <ClCompile Include="..\..\..\avs3Decoder\src\avs3_hoa_dec.c" />
+    <ClCompile Include="..\..\..\avs3Decoder\src\avs3_init_dec.c" />
+    <ClCompile Include="..\..\..\avs3Decoder\src\avs3_io_dec.c" />
+    <ClCompile Include="..\..\..\avs3Decoder\src\avs3_mc_dec.c" />
+    <ClCompile Include="..\..\..\avs3Decoder\src\avs3_metadata_dec.c" />
+    <ClCompile Include="..\..\..\avs3Decoder\src\avs3_mix_dec.c" />
+    <ClCompile Include="..\..\..\avs3Decoder\src\avs3_mono_dec.c" />
+    <ClCompile Include="..\..\..\avs3Decoder\src\avs3_stereo_dec.c" />
+    <ClCompile Include="..\..\..\avs3Decoder\src\avs3_write_wav.c" />
+    <ClCompile Include="..\..\..\avs3Decoder\src\decoder.c" />
+    <ClCompile Include="..\..\src\avs3_bitstream_enc.c" />
+    <ClCompile Include="..\..\src\avs3_enc.c" />
+    <ClCompile Include="..\..\src\avs3_hoa_decomposition.c" />
+    <ClCompile Include="..\..\src\avs3_hoa_enc.c" />
+    <ClCompile Include="..\..\src\avs3_init_enc.c" />
+    <ClCompile Include="..\..\src\avs3_io_enc.c" />
+    <ClCompile Include="..\..\src\avs3_mc_enc.c" />
+    <ClCompile Include="..\..\src\avs3_metadata_enc.c" />
+    <ClCompile Include="..\..\src\avs3_mix_enc.c" />
+    <ClCompile Include="..\..\src\avs3_mono_enc.c" />
+    <ClCompile Include="..\..\src\avs3_stereo_enc.c" />
+    <ClCompile Include="..\..\src\bwe_enc.c" />
+    <ClCompile Include="..\..\src\encoder.c" />
+    <ClCompile Include="..\..\src\fd_spectrum_shaping_enc.c" />
+    <ClCompile Include="..\..\src\lsf_enc.c" />
+    <ClCompile Include="..\..\src\signal_analysis.c" />
+    <ClCompile Include="..\..\src\windowtype_detect.c" />
+    <ClCompile Include="..\..\..\libavs3_common\activation_func.c" />
+    <ClCompile Include="..\..\..\libavs3_common\avs3_com.c" />
+    <ClCompile Include="..\..\..\libavs3_common\avs3_hoa_com.c" />
+    <ClCompile Include="..\..\..\libavs3_common\avs3_mc_com.c" />
+    <ClCompile Include="..\..\..\libavs3_common\avs3_rom_com.c" />
+    <ClCompile Include="..\..\..\libavs3_common\avs3_stereo_com.c" />
+    <ClCompile Include="..\..\..\libavs3_common\bwe_com.c" />
+    <ClCompile Include="..\..\..\libavs3_common\bwe_dec.c" />
+    <ClCompile Include="..\..\..\libavs3_common\cnn_layer.c" />
+    <ClCompile Include="..\..\..\libavs3_common\fd_spectrum_shaping_com.c" />
+    <ClCompile Include="..\..\..\libavs3_common\fd_spectrum_shaping_dec.c" />
+    <ClCompile Include="..\..\..\libavs3_common\fft.c" />
+    <ClCompile Include="..\..\..\libavs3_common\latent_quant.c" />
+    <ClCompile Include="..\..\..\libavs3_common\load_free_model.c" />
+    <ClCompile Include="..\..\..\libavs3_common\lsf_dec.c" />
+    <ClCompile Include="..\..\..\libavs3_common\mcr_com.c" />
+    <ClCompile Include="..\..\..\libavs3_common\mdct.c" />
+    <ClCompile Include="..\..\..\libavs3_common\mdct_dequant_decode.c" />
+    <ClCompile Include="..\..\..\libavs3_common\mdct_quant_encode.c" />
+    <ClCompile Include="..\..\..\libavs3_common\noise_filling.c" />
+    <ClCompile Include="..\..\..\libavs3_common\range_coder.c" />
+    <ClCompile Include="..\..\..\libavs3_common\tns.c" />
+    <ClCompile Include="..\..\..\libavs3_common\tools.c" />
+    <ClCompile Include="..\..\..\libavs3_debug\avs3_debug.c" />
+    <ClInclude Include="..\..\..\avs3Decoder\build\avs3Decoder\gcc_Debug.h" />
+    <ClInclude Include="..\..\..\avs3Decoder\build\avs3Decoder\gcc_Release.h" />
+    <ClInclude Include="..\..\..\avs3Decoder\include\avs3_decoder_interface.h" />
+    <ClInclude Include="..\..\..\avs3Decoder\include\avs3_prot_dec.h" />
+    <ClInclude Include="..\..\..\avs3Decoder\include\avs3_stat_dec.h" />
+    <ClInclude Include="..\..\..\avs3Decoder\include\Version.h" />
+    <ClInclude Include="..\..\include\avs3_cnst_enc.h" />
+    <ClInclude Include="..\..\include\avs3_prot_enc.h" />
+    <ClInclude Include="..\..\include\avs3_stat_enc.h" />
+    <ClInclude Include="..\..\include\Version.h" />
+    <ClInclude Include="..\..\..\libavs3_common\avs3_cnst_com.h" />
+    <ClInclude Include="..\..\..\libavs3_common\avs3_const_meta.h" />
+    <ClInclude Include="..\..\..\libavs3_common\avs3_options.h" />
+    <ClInclude Include="..\..\..\libavs3_common\avs3_prot_com.h" />
+    <ClInclude Include="..\..\..\libavs3_common\avs3_rom_com.h" />
+    <ClInclude Include="..\..\..\libavs3_common\avs3_stat_com.h" />
+    <ClInclude Include="..\..\..\libavs3_common\avs3_stat_meta.h" />
+    <ClInclude Include="..\..\..\libavs3_common\Instruction.h" />
+    <ClInclude Include="..\..\..\libavs3_common\model.h" />
+    <ClInclude Include="..\..\..\libavs3_debug\avs3_debug.h" />
+    <None Include="avs3Encoder-Debug.vgdbsettings" />
+    <None Include="avs3Encoder-Release.vgdbsettings" />
+  </ItemGroup>
+</Project>

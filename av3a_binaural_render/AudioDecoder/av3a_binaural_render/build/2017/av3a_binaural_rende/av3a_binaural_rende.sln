@@ -1,0 +1,27 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "av3a_binaural_rende", "av3a_binaural_rende.vcxproj", "{06DF578A-7FE6-491A-B856-A4378CC9F5C5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06DF578A-7FE6-491A-B856-A4378CC9F5C5}.Debug|x64.ActiveCfg = Debug|Win32
+		{06DF578A-7FE6-491A-B856-A4378CC9F5C5}.Debug|x86.ActiveCfg = Debug|Win32
+		{06DF578A-7FE6-491A-B856-A4378CC9F5C5}.Debug|x86.Build.0 = Debug|Win32
+		{06DF578A-7FE6-491A-B856-A4378CC9F5C5}.Release|x64.ActiveCfg = Release|Win32
+		{06DF578A-7FE6-491A-B856-A4378CC9F5C5}.Release|x86.ActiveCfg = Release|Win32
+		{06DF578A-7FE6-491A-B856-A4378CC9F5C5}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BFC00C59-CEA7-4E12-AE58-E2D16E3271CB}
+	EndGlobalSection
+EndGlobal

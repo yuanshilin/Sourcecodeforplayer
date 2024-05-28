@@ -1,0 +1,12 @@
+{
+global:
+        Avs3EncoderGetCommandLine;
+        Avs3EncoderInit;
+        ConvertBitDepth;
+        Avs3MetadataEnc;
+        Avs3Encode;
+        Avs3FlushBitstream;
+        Avs3EncoderDestroy;
+		Avs3FlushBitstream2buf;
+local:*;
+};

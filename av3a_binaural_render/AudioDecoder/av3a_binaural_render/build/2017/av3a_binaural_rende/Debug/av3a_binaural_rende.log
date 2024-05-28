@@ -1,0 +1,36 @@
+﻿  VisualGDB: Run "make -f av3a_binaural_render.mk" in directory "/mnt/data/remote/yfxu_coding/AudioDecoder/av3a_binaural_render/build/linux" on root@172.17.28.97:60112 (SSH)
+  g++  -c  "/mnt/data/remote/yfxu_coding/AudioDecoder/av3a_binaural_render/binaural_render.cpp" -std=c++11 -fPIC -O3 -Wall -DHAVE_CONFIG_H  -o ./Release/av3a_binaural_render_binaural_render.o -I. -I../../ -I../../../../VMFFramework/bin/VMFSDK/include/PlatForm -I. 
+  /mnt/data/remote/yfxu_coding/AudioDecoder/av3a_binaural_render/binaural_render.cpp: In constructor ‘AVS3::BinauralRender::BinauralRender(const std::shared_ptr<AVS3::Metadata>&, AVS3::RenderMode)’:
+E:\Code\svn_dir\Transformer\AudioDecoder\av3a_binaural_render\binaural_render.cpp(24,9): warning : unused variable ‘level’ [-Wunused-variable]
+       int level = metadata->getAmbisonicOrder();
+           ^~~~~
+  g++  -c  "/mnt/data/remote/yfxu_coding/AudioDecoder/av3a_binaural_render/adm.cpp" -std=c++11 -fPIC -O3 -Wall -DHAVE_CONFIG_H  -o ./Release/av3a_binaural_render_adm.o -I. -I../../ -I../../../../VMFFramework/bin/VMFSDK/include/PlatForm -I. 
+  g++  -c  "/mnt/data/remote/yfxu_coding/AudioDecoder/av3a_binaural_render/metadata.cpp" -std=c++11 -fPIC -O3 -Wall -DHAVE_CONFIG_H  -o ./Release/av3a_binaural_render_metadata.o -I. -I../../ -I../../../../VMFFramework/bin/VMFSDK/include/PlatForm -I. 
+  E:\Code\svn_dir\Transformer\AudioDecoder\av3a_binaural_render\metadata.cpp(15):
+  /mnt/data/remote/yfxu_coding/AudioDecoder/av3a_binaural_render/metadata.h: In constructor ‘AVS3::Metadata::Metadata(std::shared_ptr<AVS3::ADM>&, int, int)’:
+E:\Code\svn_dir\Transformer\AudioDecoder\av3a_binaural_render\metadata.h(114,9): warning : ‘AVS3::Metadata::sampleRate’ will be initialized after [-Wreorder]
+       int sampleRate;
+           ^~~~~~~~~~
+E:\Code\svn_dir\Transformer\AudioDecoder\av3a_binaural_render\metadata.h(113,9): warning : ‘int AVS3::Metadata::framePerBuffer’ [-Wreorder]
+       int framePerBuffer;
+           ^~~~~~~~~~~~~~
+E:\Code\svn_dir\Transformer\AudioDecoder\av3a_binaural_render\metadata.cpp(28,1): warning : when initialized here [-Wreorder]
+   Metadata::Metadata(shared_ptr<AVS3::ADM> &adm, int sampleRate, int framePerBuffer)
+   ^~~~~~~~
+  /mnt/data/remote/yfxu_coding/AudioDecoder/av3a_binaural_render/metadata.cpp: In member function ‘std::shared_ptr<AVS3::MetadataObject> AVS3::Metadata::convertObject(std::shared_ptr<AVS3::AudioObject>&, float) const’:
+E:\Code\svn_dir\Transformer\AudioDecoder\av3a_binaural_render\metadata.cpp(140,24): warning : unused variable ‘ab’ [-Wunused-variable]
+               for (auto &ab: acf->audioBlockFormat) {
+                          ^~
+  /mnt/data/remote/yfxu_coding/AudioDecoder/av3a_binaural_render/metadata.cpp: In static member function ‘static std::vector<std::shared_ptr<AVS3::ObjectFrame> > AVS3::Metadata::parseObjectFrame(std::__cxx11::list<std::shared_ptr<AVS3::AudioBlockFormat> >&, double)’:
+E:\Code\svn_dir\Transformer\AudioDecoder\av3a_binaural_render\metadata.cpp(188,23): warning : comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::shared_ptr<AVS3::AudioBlockFormat> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+       for (int i = 0; i < audioBlockFormat.size(); ++i) {
+                       ~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\Code\svn_dir\Transformer\AudioDecoder\av3a_binaural_render\metadata.cpp(226,32): warning : comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::shared_ptr<AVS3::AudioBlockFormat> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+       for (int i = startIndex; i < audioBlockFormat.size(); ++i) {
+                                ~~^~~~~~~~~~~~~~~~~~~~~~~~~
+  /mnt/data/remote/yfxu_coding/AudioDecoder/av3a_binaural_render/metadata.cpp: In member function ‘std::shared_ptr<AVS3::ObjectFrame> AVS3::Metadata::getNextObjectFrame(int)’:
+E:\Code\svn_dir\Transformer\AudioDecoder\av3a_binaural_render\metadata.cpp(281,68): warning : comparison of integer expressions of different signedness: ‘std::vector<std::shared_ptr<AVS3::ObjectFrame> >::size_type’ {aka ‘long unsigned int’} and ‘int64_t’ {aka ‘long int’} [-Wsign-compare]
+               if (ms->trackIndex == index && ms->objectFrames.size() > ms->current_object_frame) {
+                                              ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~
+  g++  -c  "/mnt/data/remote/yfxu_coding/AudioDecoder/av3a_binaural_render/metadata_parser.cpp" -std=c++11 -fPIC -O3 -Wall -DHAVE_CONFIG_H  -o ./Release/av3a_binaural_render_metadata_parser.o -I. -I../../ -I../../../../VMFFramework/bin/VMFSDK/include/PlatForm -I. 
+  g++ -shared -fPIC -o /mnt/data/local-disk1/yfxu/linux/libav3a_binaural_render.so @"av3a_binaural_render.txt" -L.   -lpthread -Wl,--version-script=version-script.txt -Wl,--retain-symbols-file=retain_symbols.txt 
