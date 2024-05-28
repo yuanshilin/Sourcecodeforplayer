@@ -5,7 +5,7 @@
 ## Release
 ProjectName            :=av3a_binaural_render
 ConfigurationName      :=Release
-WorkspacePath          := "/Users/develop/Documents/workspace/SVN/av3a_binaural_render"
+WorkspacePath          := "/Users/develop/Documents/workspace/gitlab/player/sourcecodeforplayer/av3a_binaural_render"
 ProjectPath            := "$(WorkspacePath)/AudioDecoder/av3a_binaural_render/build/linux"
 IntermediateDirectory  :=./Release
 OutDir                 := $(IntermediateDirectory)
