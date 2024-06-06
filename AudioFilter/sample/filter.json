@@ -1,0 +1,38 @@
+{
+    "filters":[
+          {
+            "type": 7,
+            "freq": 100,
+            "Qfactor": 1,
+            "gain": 10,
+            "channels": 1
+        },{
+            "type": 6,
+            "freq": 100,
+            "Qfactor": 1,
+            "gain": 2,
+            "channels": 1
+        },
+        {
+            "type": 6,
+            "freq": 200,
+            "Qfactor": 1,
+            "gain": 2,
+            "channels": 1
+        },
+        {
+            "type": 6,
+            "freq": 400,
+            "Qfactor": 1,
+            "gain": 2,
+            "channels": 1
+        },
+        {
+            "type": 6,
+            "freq": 800,
+            "Qfactor": 1,
+            "gain": 2,
+            "channels": 1
+        }
+    ]
+}
