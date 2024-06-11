@@ -160,7 +160,7 @@ const FFOutputFormat ff_avs3_muxer = {
 #if CONFIG_AV3A_MUXER
 const FFOutputFormat ff_av3a_muxer = {
     .p.name            = "av3a",
-    .p.long_name       = NULL_IF_CONFIG_SMALL("AVS3-P2/IEEE1857.10"),
+    .p.long_name       = NULL_IF_CONFIG_SMALL("AV3A audio vivid"),
     .p.extensions      = "av3a",
     .p.audio_codec     = AV_CODEC_ID_AV3A,
     .p.video_codec     = AV_CODEC_ID_NONE,

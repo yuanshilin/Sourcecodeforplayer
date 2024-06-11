@@ -164,7 +164,7 @@ static av_cold int arcdav3a_decode_init(AVCodecContext *avctx)
 	h->m_pRenderBuffer = NULL;
 	h->m_bGotMD = false;
 	h->renderhandle = NULL;
-	h->BinaRender = false;
+	h->BinaRender = true;
 	av_log(avctx, AV_LOG_DEBUG, "end arcdav3a_decode_init!\n");
     return 0;
 }
@@ -499,7 +499,7 @@ static int arcdav3a_decode_frame(AVCodecContext *avctx, AVFrame *frm, int *got_f
                                                 &side_data_size);
 	if(side_data && side_data_size>0){
 											
-	    h->BinaRender = false;//((Av3aSideData*)side_data)->BinauralRender == true?true:false;
+	    h->BinaRender = ((Av3aSideData*)side_data)->BinauralRender == true?true:false;
 		av_log(avctx, AV_LOG_DEBUG, "h->BinaRender=%d\n", h->BinaRender);
 	}
 
@@ -581,6 +581,7 @@ static int arcdav3a_decode_frame(AVCodecContext *avctx, AVFrame *frm, int *got_f
 			else if(chconf == CHANNEL_CONFIG_UNKNOWN)//error
 			    av_log(avctx, AV_LOG_ERROR, "unknown audio chconf! Please check the source...\n");
             avctx->ch_layout  = frm->ch_layout;//need reset avctx->ch_layout for ff_get_buffer to get correct size
+			avctx->ch_layout.nb_channels = h->out_frame.nChannel;
 			avctx->sample_rate = frm->sample_rate;
 
 			frm->format = AV_SAMPLE_FMT_S16;
