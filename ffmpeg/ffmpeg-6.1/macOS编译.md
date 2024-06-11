@@ -4,11 +4,29 @@
 
 ./configure  --extra-libs="-lpthread -lm"  --extra-ldflags=-ldl  --ld="g++" --enable-gpl  --enable-libarcdav3a --enable-shared  --disable-static --enable-sdl --prefix=/usr/local/ffmpeg
 
-make & make install
+make -j8
+
+make install
 
 ### 碰到过的问题：
 
-#### 1、执行`./ffplay xxx.mp4` 报错：
+#### 1、make报错
+
+```
+ld: -current_version: malformed version number '-compatibility_version' cannot fit in 32-bit xxxx.yy.zz
+
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+```
+
+解决方法：
+
+```
+chmod +x ffbuild/*.sh
+```
+
+
+
+#### 2、执行`./ffplay xxx.mp4` 报错：
 
 ```
 `dyld[48982]: Library not loaded: @rpath/libSDL2-2.0.0.dylib`
@@ -26,11 +44,11 @@ install_name_tool -add_rpath /usr/local/lib ffplay
 
 
 
-### 2、缺少依赖库: libav3a_binaural_render.so    libAVS3AudioDec.so  model.bin 
+### 3、缺少依赖库: libav3a_binaural_render.so    libAVS3AudioDec.so  model.bin 
 
 ##### 解决方法：
 
 ```
-libav3a_binaural_render.so libAVS3AudioDec.so放到/usr/local/bin目录下，model.bin放到ffmpeg目录下
+libav3a_binaural_render.so libAVS3AudioDec.so放到/usr/local/lib目录下，model.bin放到ffmpeg目录下
 ```
 
