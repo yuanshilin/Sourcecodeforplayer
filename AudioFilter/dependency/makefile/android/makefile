@@ -9,7 +9,7 @@ CXX=$(TOOLCHAIN)/bin/aarch64-linux-android$(API)-clang++
 
 SRC_DIRS=../../src/cjson
 SRC=$(foreach TMP_SRC_DIRS, $(SRC_DIRS), $(wildcard $(TMP_SRC_DIRS)/*.c))
-TARGET=../../lib/android/arm64-v8a/libcjson.a
+TARGET=../../lib/android/arm64-v8a/libcjson.so
 OBJ:=$(SRC:.c=.o)
 
 INC_EXTERN=-I../../src/cjson
