@@ -499,7 +499,7 @@ static int arcdav3a_decode_frame(AVCodecContext *avctx, AVFrame *frm, int *got_f
                                                 &side_data_size);
 	if(side_data && side_data_size>0){
 											
-        h->BinaRender = fasle;//((Av3aSideData*)side_data)->BinauralRender == true?true:false;
+        h->BinaRender = false;//((Av3aSideData*)side_data)->BinauralRender == true?true:false;
 		av_log(avctx, AV_LOG_DEBUG, "h->BinaRender=%d\n", h->BinaRender);
 	}
 

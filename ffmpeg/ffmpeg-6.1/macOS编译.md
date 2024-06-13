@@ -1,8 +1,14 @@
 # macOS编译ffmpeg + 支持audio vivid
 
-### 编译命令
+### 调音库安装：
 
-./configure  --extra-libs="-lpthread -lm"  --extra-ldflags=-ldl  --ld="g++" --enable-gpl  --enable-libarcdav3a --enable-shared  --disable-static --enable-sdl --prefix=/usr/local/ffmpeg
+源码路径：http://172.28.10.84/caraudio/player/sourcecodeforplayer/-/tree/master/AudioFilter
+
+执行makefile/mac/installFilter.sh，需要sudo权限
+
+### ffmpeg编译命令：
+
+./configure  --extra-libs="-lpthread -lm -ldhfilter "  --extra-ldflags='-ldl -L /usr/local/lib/' --ld="g++" --enable-gpl  --enable-libarcdav3a --enable-shared  --disable-static --enable-sdl --extra-cflags=' -I /usr/local/include/FilterEngine '  --prefix=/usr/local/ffmpeg
 
 make -j8
 

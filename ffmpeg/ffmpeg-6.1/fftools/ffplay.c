@@ -60,6 +60,13 @@
 #include "cmdutils.h"
 #include "opt_common.h"
 
+#define USE_AUDIO_FILTER
+#ifdef USE_AUDIO_FILTER
+
+#include "FilterEngine.h"
+#include <stdio.h>
+#endif
+
 const char program_name[] = "ffplay";
 const int program_birth_year = 2003;
 
@@ -301,6 +308,9 @@ typedef struct VideoState {
     int last_video_stream, last_audio_stream, last_subtitle_stream;
 
     SDL_cond *continue_read_thread;
+#ifdef USE_AUDIO_FILTER
+    void* filterEngine;
+#endif
 } VideoState;
 
 /* options specified by the user */
@@ -350,6 +360,9 @@ static char *afilters = NULL;
 static int autorotate = 1;
 static int find_stream_info = 1;
 static int filter_nbthreads = 0;
+static int filter = 1;
+static int bDump = 0;
+static FILE* dump_file = NULL;
 
 /* current context */
 static int is_full_screen;
@@ -1206,7 +1219,13 @@ static void stream_component_close(VideoState *is, int stream_index)
         av_freep(&is->audio_buf1);
         is->audio_buf1_size = 0;
         is->audio_buf = NULL;
-
+#ifdef USE_AUDIO_FILTER
+        if (is->filterEngine) {
+            StopFilterEngine(is->filterEngine);
+            DestroyFilterEngine(is->filterEngine);
+            is->filterEngine = NULL;
+        }
+#endif
         if (is->rdft) {
             av_tx_uninit(&is->rdft);
             av_freep(&is->real_data);
@@ -2451,12 +2470,17 @@ static void sdl_audio_callback(void *opaque, Uint8 *stream, int len)
         len1 = is->audio_buf_size - is->audio_buf_index;
         if (len1 > len)
             len1 = len;
+#ifdef USE_AUDIO_FILTER        
+        uint8_t* buf = FilterAudio(is->filterEngine, is->audio_buf + is->audio_buf_index, len1);
+#else
+        uint8_t* buf = (uint8_t *)is->audio_buf + is->audio_buf_index;
+#endif
         if (!is->muted && is->audio_buf && is->audio_volume == SDL_MIX_MAXVOLUME)
-            memcpy(stream, (uint8_t *)is->audio_buf + is->audio_buf_index, len1);
+            memcpy(stream, buf, len1);
         else {
             memset(stream, 0, len1);
             if (!is->muted && is->audio_buf)
-                SDL_MixAudioFormat(stream, (uint8_t *)is->audio_buf + is->audio_buf_index, AUDIO_S16SYS, len1, is->audio_volume);
+                SDL_MixAudioFormat(stream, buf, AUDIO_S16SYS, len1, is->audio_volume);
         }
         len -= len1;
         stream += len1;
@@ -2472,6 +2496,7 @@ static void sdl_audio_callback(void *opaque, Uint8 *stream, int len)
 
 static int audio_open(void *opaque, AVChannelLayout *wanted_channel_layout, int wanted_sample_rate, struct AudioParams *audio_hw_params)
 {
+    VideoState *is = opaque;
     SDL_AudioSpec wanted_spec, spec;
     const char *env;
     static const int next_nb_channels[] = {0, 0, 1, 6, 2, 6, 4, 6};
@@ -2543,6 +2568,20 @@ static int audio_open(void *opaque, AVChannelLayout *wanted_channel_layout, int 
         av_log(NULL, AV_LOG_ERROR, "av_samples_get_buffer_size failed\n");
         return -1;
     }
+#ifdef USE_AUDIO_FILTER
+    if (filter) {
+        AudioParam param = {0};
+        param.format = spec.format;
+        param.channels = spec.channels;
+        param.freq = spec.freq;
+        param.samples = spec.samples;
+        CreateFilterEngine(&is->filterEngine);
+        StartFilterEngine(is->filterEngine, &param, "1.json");
+        StartDebug(is->filterEngine); 
+    }
+    
+#endif
+
     return spec.size;
 }
 
