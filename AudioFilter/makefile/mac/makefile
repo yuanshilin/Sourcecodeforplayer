@@ -1,11 +1,11 @@
 CC:=gcc
 SRC_DIRS=../../src/dhfilter
 SRC=$(foreach TMP_SRC_DIRS, $(SRC_DIRS), $(wildcard $(TMP_SRC_DIRS)/*.c))
-TARGET=../../output/mac-m2/libdhfilter.a
+TARGET=/usr/local/lib/libdhfilter.a
 OBJ:=$(SRC:.c=.o)
 
 INC_EXTERN=-I../../src/dhfilter -I../../dependency/src/cjson
-LIB_EXTERN=-L../../dependency/lib/mac-m2
+LIB_EXTERN=-L/usr/local/lib/
 INCLUDE=$(INC_EXTERN)
 DEP_LIB=-lcjson   $(LIB_EXTERN)
 all: $(TARGET)

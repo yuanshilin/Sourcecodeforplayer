@@ -1,7 +1,7 @@
 CC:=gcc
 SRC_DIRS=../../src/cjson
 SRC=$(foreach TMP_SRC_DIRS, $(SRC_DIRS), $(wildcard $(TMP_SRC_DIRS)/*.c))
-TARGET=../../lib/mac-m2/libcjson.a
+TARGET=/usr/local/lib/libcjson.a
 OBJ:=$(SRC:.c=.o)
 
 INC_EXTERN=-I../../src/cjson
