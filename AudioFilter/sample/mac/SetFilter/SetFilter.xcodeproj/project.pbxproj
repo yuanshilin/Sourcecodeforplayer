@@ -17,6 +17,7 @@
 		BA224E2F2B9705220054A8E2 /* SetFilterUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA224E2E2B9705220054A8E2 /* SetFilterUITestsLaunchTests.m */; };
 		BA5D86B12BCD36860070AC52 /* SeparateChannelView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5D86B02BCD36860070AC52 /* SeparateChannelView.m */; };
 		BA5D86B42BCFAF450070AC52 /* CustomSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5D86B32BCFAF450070AC52 /* CustomSliderView.m */; };
+		BA77D4CC2C1943BA0074A597 /* ChangePositionView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA77D4CB2C1943BA0074A597 /* ChangePositionView.m */; };
 		BA79E0C42B9E9D40007F087B /* FilterParamView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA79E0C32B9E9D40007F087B /* FilterParamView.m */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,8 @@
 		BA5D86B02BCD36860070AC52 /* SeparateChannelView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SeparateChannelView.m; sourceTree = "<group>"; };
 		BA5D86B22BCFAF450070AC52 /* CustomSliderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomSliderView.h; sourceTree = "<group>"; };
 		BA5D86B32BCFAF450070AC52 /* CustomSliderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomSliderView.m; sourceTree = "<group>"; };
+		BA77D4CA2C1943BA0074A597 /* ChangePositionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePositionView.h; sourceTree = "<group>"; };
+		BA77D4CB2C1943BA0074A597 /* ChangePositionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePositionView.m; sourceTree = "<group>"; };
 		BA79E0C22B9E9D40007F087B /* FilterParamView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterParamView.h; sourceTree = "<group>"; };
 		BA79E0C32B9E9D40007F087B /* FilterParamView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterParamView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,6 +115,8 @@
 				BA224E0D2B9705200054A8E2 /* AppDelegate.m */,
 				BA224E0F2B9705200054A8E2 /* ViewController.h */,
 				BA224E102B9705200054A8E2 /* ViewController.m */,
+				BA77D4CA2C1943BA0074A597 /* ChangePositionView.h */,
+				BA77D4CB2C1943BA0074A597 /* ChangePositionView.m */,
 				BA5D86B22BCFAF450070AC52 /* CustomSliderView.h */,
 				BA5D86B32BCFAF450070AC52 /* CustomSliderView.m */,
 				BA79E0C22B9E9D40007F087B /* FilterParamView.h */,
@@ -278,6 +283,7 @@
 				BA5D86B12BCD36860070AC52 /* SeparateChannelView.m in Sources */,
 				BA79E0C42B9E9D40007F087B /* FilterParamView.m in Sources */,
 				BA224E0E2B9705200054A8E2 /* AppDelegate.m in Sources */,
+				BA77D4CC2C1943BA0074A597 /* ChangePositionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

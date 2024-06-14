@@ -9,6 +9,7 @@
 #import "FilterParamView.h"
 #import "SeparateChannelView.h"
 #import "CustomSliderView.h"
+#import "ChangePositionView.h"
 
 #include <sys/socket.h>
 #include <unistd.h>
@@ -23,11 +24,13 @@
 #define LABEL_HEIGHT 20.0f
 #define MARGIN 10.0f
 
+#define MAX_CHANGED_GAIN 6.0f
+
 #define Table_Width 330.0f
 
 static int freqs[] = {20,25,31,40,50,63,80,100,118, 156,196,264,326, 408,524,641,800,998,1322,1579, 2000,2477,3150, 4000, 5000, 6300,8000, 10000, 12500, 16000, 20000};
 
-@interface ViewController ()<NSTextViewDelegate, AddFilterParamDelegate, AddSepChannelParamDelegate>
+@interface ViewController ()<NSTextViewDelegate, AddFilterParamDelegate, AddSepChannelParamDelegate, ChangePositionDelegate>
 
 @property (strong) NSMutableDictionary* jsonDict;
 @property (strong) NSMutableDictionary* filterParams;
@@ -36,6 +39,7 @@ static int freqs[] = {20,25,31,40,50,63,80,100,118, 156,196,264,326, 408,524,641
 @property (strong) IBOutlet NSTextView *jsonText;
 @property (strong) IBOutlet NSView *hzSliderView;
 @property (strong) IBOutlet NSView *sepChannelView;
+@property (strong) IBOutlet NSView *changePositionView;
 
 @property (strong) IBOutlet NSTextField *ipText;
 @property (strong) IBOutlet NSTextField *portText;
@@ -53,6 +57,7 @@ static int freqs[] = {20,25,31,40,50,63,80,100,118, 156,196,264,326, 408,524,641
     
     [self setupSliders];
     [self setupSepChannelView];
+    [self setupChangePositionView];
 
     self.jsonDict = [NSMutableDictionary dictionaryWithCapacity:16];
     self.filterParams = [NSMutableDictionary dictionaryWithCapacity:16];
@@ -63,6 +68,13 @@ static int freqs[] = {20,25,31,40,50,63,80,100,118, 156,196,264,326, 408,524,641
     
     self.targetView = self.typeText;
     self.sliderQfactor.floatValue = DEFAULT_Q;
+}
+
+- (void)setupChangePositionView {
+    ChangePositionView* view = [[ChangePositionView alloc] initWithFrame:CGRectMake(0, 0, 256, 384)];
+    view.delegate = self;
+    
+    [self.changePositionView addSubview:view];
 }
 
 - (void)setupSepChannelView {
@@ -155,6 +167,71 @@ static int freqs[] = {20,25,31,40,50,63,80,100,118, 156,196,264,326, 408,524,641
 
     [self refreshTextView];
 
+}
+
+- (void)changePotisonX:(float)xPos Y:(float)yPos channels:(int)count {
+    
+    if (xPos > 1.0f) xPos = 1.0f;
+    if (xPos < -1.0f) xPos = -1.0f;
+    if (yPos > 1.0f) yPos = 1.0f;
+    if (yPos < -1.0f) yPos = -1.0f;
+    
+    NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithCapacity:10];
+    if (count == 2) {
+        int channels = 0x01;
+        float gain = -xPos * MAX_CHANGED_GAIN;
+        [dict setValue:@(1) forKey:@"type"];
+        [dict setValue:@(channels) forKey:@"channels"];
+        [dict setValue:@(gain) forKey:@"gain"];
+        [self.filterParams setValue:[NSDictionary dictionaryWithDictionary:dict] forKey:[NSString stringWithFormat:@"1/%d/gain", channels]];
+        [dict removeAllObjects];
+        channels = 0x02;
+        gain = xPos * MAX_CHANGED_GAIN;
+        [dict setValue:@(1) forKey:@"type"];
+        [dict setValue:@(channels) forKey:@"channels"];
+        [dict setValue:@(gain) forKey:@"gain"];
+        [self.filterParams setValue:[NSDictionary dictionaryWithDictionary:dict] forKey:[NSString stringWithFormat:@"1/%d/gain", channels]];
+
+    } else if (count == 10) {
+        int channels = 0x01 | 0x40;
+        float gain = -xPos * MAX_CHANGED_GAIN + yPos * MAX_CHANGED_GAIN;
+        [dict setValue:@(1) forKey:@"type"];
+        [dict setValue:@(channels) forKey:@"channels"];
+        [dict setValue:@(gain) forKey:@"gain"];
+        [self.filterParams setValue:[NSDictionary dictionaryWithDictionary:dict] forKey:[NSString stringWithFormat:@"1/%d/gain", channels]];
+        [dict removeAllObjects];
+        channels = 0x02 | 0x80;
+        gain = xPos * MAX_CHANGED_GAIN + yPos * MAX_CHANGED_GAIN;
+        [dict setValue:@(1) forKey:@"type"];
+        [dict setValue:@(channels) forKey:@"channels"];
+        [dict setValue:@(gain) forKey:@"gain"];
+        [self.filterParams setValue:[NSDictionary dictionaryWithDictionary:dict] forKey:[NSString stringWithFormat:@"1/%d/gain", channels]];
+        [dict removeAllObjects];
+        channels = 0x04;
+        gain = yPos * MAX_CHANGED_GAIN;
+        [dict setValue:@(1) forKey:@"type"];
+        [dict setValue:@(channels) forKey:@"channels"];
+        [dict setValue:@(gain) forKey:@"gain"];
+        [self.filterParams setValue:[NSDictionary dictionaryWithDictionary:dict] forKey:[NSString stringWithFormat:@"1/%d/gain", channels]];
+        [dict removeAllObjects];
+        channels = 0x10 | 0x100;
+        gain = -xPos * MAX_CHANGED_GAIN - yPos * MAX_CHANGED_GAIN;
+        [dict setValue:@(1) forKey:@"type"];
+        [dict setValue:@(channels) forKey:@"channels"];
+        [dict setValue:@(gain) forKey:@"gain"];
+        [self.filterParams setValue:[NSDictionary dictionaryWithDictionary:dict] forKey:[NSString stringWithFormat:@"1/%d/gain", channels]];
+        [dict removeAllObjects];
+        channels = 0x20 | 0x200;
+        gain = xPos * MAX_CHANGED_GAIN - yPos * MAX_CHANGED_GAIN;
+        [dict setValue:@(1) forKey:@"type"];
+        [dict setValue:@(channels) forKey:@"channels"];
+        [dict setValue:@(gain) forKey:@"gain"];
+        [self.filterParams setValue:[NSDictionary dictionaryWithDictionary:dict] forKey:[NSString stringWithFormat:@"1/%d/gain", channels]];
+    } else if (count == 12) {
+        
+    }
+
+    [self refreshTextView];
 }
 
 #pragma mark -- Button Action --
