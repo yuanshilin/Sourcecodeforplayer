@@ -69,5 +69,8 @@
     
     NSLog(@"point: %@", NSStringFromPoint(point));
     NSLog(@"area: %@", NSStringFromRect(click.view.frame));
+    
+    self.xPos.floatValue = 2 * point.x / click.view.frame.size.width - 1;
+    self.yPos.floatValue = 2 * point.y / click.view.frame.size.height - 1;
 }
 @end

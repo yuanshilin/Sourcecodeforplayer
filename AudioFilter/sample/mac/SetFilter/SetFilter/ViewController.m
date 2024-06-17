@@ -228,7 +228,54 @@ static int freqs[] = {20,25,31,40,50,63,80,100,118, 156,196,264,326, 408,524,641
         [dict setValue:@(gain) forKey:@"gain"];
         [self.filterParams setValue:[NSDictionary dictionaryWithDictionary:dict] forKey:[NSString stringWithFormat:@"1/%d/gain", channels]];
     } else if (count == 12) {
-        
+        int channels = 0x01 | 0x100;
+        float gain = -xPos * MAX_CHANGED_GAIN + yPos * MAX_CHANGED_GAIN;
+        [dict setValue:@(1) forKey:@"type"];
+        [dict setValue:@(channels) forKey:@"channels"];
+        [dict setValue:@(gain) forKey:@"gain"];
+        [self.filterParams setValue:[NSDictionary dictionaryWithDictionary:dict] forKey:[NSString stringWithFormat:@"1/%d/gain", channels]];
+        [dict removeAllObjects];
+        channels = 0x02 | 0x200;
+        gain = xPos * MAX_CHANGED_GAIN + yPos * MAX_CHANGED_GAIN;
+        [dict setValue:@(1) forKey:@"type"];
+        [dict setValue:@(channels) forKey:@"channels"];
+        [dict setValue:@(gain) forKey:@"gain"];
+        [self.filterParams setValue:[NSDictionary dictionaryWithDictionary:dict] forKey:[NSString stringWithFormat:@"1/%d/gain", channels]];
+        [dict removeAllObjects];
+        channels = 0x04;
+        gain = yPos * MAX_CHANGED_GAIN;
+        [dict setValue:@(1) forKey:@"type"];
+        [dict setValue:@(channels) forKey:@"channels"];
+        [dict setValue:@(gain) forKey:@"gain"];
+        [self.filterParams setValue:[NSDictionary dictionaryWithDictionary:dict] forKey:[NSString stringWithFormat:@"1/%d/gain", channels]];
+        [dict removeAllObjects];
+        channels = 0x10;
+        gain = -xPos * MAX_CHANGED_GAIN;
+        [dict setValue:@(1) forKey:@"type"];
+        [dict setValue:@(channels) forKey:@"channels"];
+        [dict setValue:@(gain) forKey:@"gain"];
+        [self.filterParams setValue:[NSDictionary dictionaryWithDictionary:dict] forKey:[NSString stringWithFormat:@"1/%d/gain", channels]];
+        [dict removeAllObjects];
+        channels = 0x20;
+        gain = xPos * MAX_CHANGED_GAIN;
+        [dict setValue:@(1) forKey:@"type"];
+        [dict setValue:@(channels) forKey:@"channels"];
+        [dict setValue:@(gain) forKey:@"gain"];
+        [self.filterParams setValue:[NSDictionary dictionaryWithDictionary:dict] forKey:[NSString stringWithFormat:@"1/%d/gain", channels]];
+        [dict removeAllObjects];
+        channels = 0x40 | 0x400;
+        gain = -xPos * MAX_CHANGED_GAIN - yPos * MAX_CHANGED_GAIN;
+        [dict setValue:@(1) forKey:@"type"];
+        [dict setValue:@(channels) forKey:@"channels"];
+        [dict setValue:@(gain) forKey:@"gain"];
+        [self.filterParams setValue:[NSDictionary dictionaryWithDictionary:dict] forKey:[NSString stringWithFormat:@"1/%d/gain", channels]];
+        [dict removeAllObjects];
+        channels = 0x80 | 0x800;
+        gain = xPos * MAX_CHANGED_GAIN - yPos * MAX_CHANGED_GAIN;
+        [dict setValue:@(1) forKey:@"type"];
+        [dict setValue:@(channels) forKey:@"channels"];
+        [dict setValue:@(gain) forKey:@"gain"];
+        [self.filterParams setValue:[NSDictionary dictionaryWithDictionary:dict] forKey:[NSString stringWithFormat:@"1/%d/gain", channels]];
     }
 
     [self refreshTextView];
