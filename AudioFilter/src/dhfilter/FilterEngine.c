@@ -324,8 +324,9 @@ void AddChannelDelays(void* pEngine, const float* channel_delays_ms)
     
     fEngine->pDelayProcessor = create_delay_processor();
     int ret = initialize_delay_processor(fEngine->pDelayProcessor, fEngine->aParam.freq, fEngine->aParam.channels, channel_delays_ms);
+    Log_Debug("AddChannelDelays init delay processor freq: %d, channels: %d, delay: %f, ret: %d\r\n", fEngine->aParam.freq, fEngine->aParam.channels, channel_delays_ms[0], ret);
     if (ret != 0) {
-        Log_Debug("Failed to initialize delay processor.\n");
+        Log_Debug("Failed to initialize delay processor. ret: %d\n", ret);
         destroy_delay_processor(fEngine->pDelayProcessor);
         fEngine->pDelayProcessor = NULL;
     } else {
@@ -398,7 +399,7 @@ int8_t* FilterAudio(void* pEngine, int8_t* inData, uint32_t inLen)
 
         int ret = process_audio(fEngine->pDelayProcessor, input_data, output_data, fEngine->aParam.samples);
         if (ret != 0) {
-            Log_Debug("Failed to process audio.\n");
+            Log_Debug("Failed to process audio. ret: %d\r\n", ret);
             ReleaseDelayProcessor(fEngine);
         } else {
             for (int ch = 0;ch < fEngine->aParam.channels; ch++) {

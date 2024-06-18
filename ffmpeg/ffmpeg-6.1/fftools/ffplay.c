@@ -2525,7 +2525,8 @@ static int audio_open(void *opaque, AVChannelLayout *wanted_channel_layout, int 
         next_sample_rate_idx--;
     wanted_spec.format = AUDIO_S16SYS;
     wanted_spec.silence = 0;
-    wanted_spec.samples = FFMAX(SDL_AUDIO_MIN_BUFFER_SIZE, 2 << av_log2(wanted_spec.freq / SDL_AUDIO_MAX_CALLBACKS_PER_SEC));
+    wanted_spec.samples = 1024;//FFMAX(SDL_AUDIO_MIN_BUFFER_SIZE, 2 << av_log2(wanted_spec.freq / SDL_AUDIO_MAX_CALLBACKS_PER_SEC));
+    printf("wanted_spec.samples %d\r\n", wanted_spec.samples);
     wanted_spec.callback = sdl_audio_callback;
     wanted_spec.userdata = opaque;
     while (!(audio_dev = SDL_OpenAudioDevice(NULL, 0, &wanted_spec, &spec, SDL_AUDIO_ALLOW_FREQUENCY_CHANGE | SDL_AUDIO_ALLOW_CHANNELS_CHANGE))) {
@@ -2568,6 +2569,7 @@ static int audio_open(void *opaque, AVChannelLayout *wanted_channel_layout, int 
         av_log(NULL, AV_LOG_ERROR, "av_samples_get_buffer_size failed\n");
         return -1;
     }
+    printf("spec.samples %d\r\n", spec.samples);
 #ifdef USE_AUDIO_FILTER
     if (filter) {
         AudioParam param = {0};
