@@ -23,7 +23,9 @@ chmod +x installFilterEngine.sh
 ```shell
 git clone http://172.28.10.84/caraudio/sdl.git
 
-# 参考ReadMe.md
+./configure --prefix=/usr/local
+sudo make -j 8 && make install
+
 ```
 
 - ffmpeg
