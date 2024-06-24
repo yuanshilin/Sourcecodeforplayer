@@ -2,20 +2,22 @@
 
 #### 编译
 
+```shell
+git clone http://172.28.10.84/caraudio/player/sourcecodeforplayer.git
+```
+
 ##### OSX
 
-- OSX Arm 平台编译 x86_64 平台的程序
+- AudioFilter
 
 ```shell
+cd AudioFilter/makefile/mac
+make
 
-cd ffmpeg/ffmpeg-6.1
-./configure --enable-cross-compile --prefix=../dist/x86_64 --arch=x86_64 --cc='clang -arch x86_64'
-make -j8
-make install
-
-# 查看编译结果
-lipo -info ../dist/x86_64/lib/libavcodec.a
-
-# 清理
-make distclean
+chmod +x installFilterEngine.sh
+./installFilterEngine.sh
 ```
+
+- ffmpeg
+
+[《macOS 编译》](./ffmpeg/ffmpeg-6.1/macOS编译.md) osx 编译 ffmpeg，以及错误解决
