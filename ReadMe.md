@@ -18,6 +18,14 @@ chmod +x installFilterEngine.sh
 ./installFilterEngine.sh
 ```
 
+- SDL
+
+```shell
+git clone http://172.28.10.84/caraudio/sdl.git
+
+# 参考ReadMe.md
+```
+
 - ffmpeg
 
 [《macOS 编译》](./ffmpeg/ffmpeg-6.1/macOS编译.md) osx 编译 ffmpeg，以及错误解决
