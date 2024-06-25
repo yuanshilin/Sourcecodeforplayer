@@ -9,8 +9,8 @@
 ### ffmpeg 编译命令：
 
 ```shell
-./configure  --extra-libs="-lpthread -lm -ldhfilter " \
-     --extra-ldflags='-ldl -L /usr/local/lib/' --ld="g++" --enable-cross-compile \
+./configure  --extra-libs="-lpthread -lm -ldhfilter "  --arch="arm64" --cc='clang -arch arm64'\
+     --extra-ldflags='-ldl -L /usr/local/lib/'  --enable-cross-compile \
      --enable-gpl  --enable-libarcdav3a --enable-shared  --disable-static --enable-sdl \
      --extra-cflags=' -I /usr/local/include/FilterEngine '  --prefix=/usr/local/ffmpeg
 
