@@ -3,8 +3,12 @@ TOOLCHAIN=$(NDK)/toolchains/llvm/prebuilt/darwin-x86_64
 ARCH=arm64
 CPU=armv8-a
 API:=24
-CC=$(TOOLCHAIN)/bin/aarch64-linux-android$(API)-clang
-CXX=$(TOOLCHAIN)/bin/aarch64-linux-android$(API)-clang++
+
+MACROS += -D_LINUX_ANDROID_
+
+CC=$(TOOLCHAIN)/bin/aarch64-linux-android$(API)-clang $(MACROS) 
+CXX=$(TOOLCHAIN)/bin/aarch64-linux-android$(API)-clang++ $(MACROS) 
+
 
 SRC_DIRS=../../src/dhfilter
 SRC=$(foreach TMP_SRC_DIRS, $(SRC_DIRS), $(wildcard $(TMP_SRC_DIRS)/*.c))

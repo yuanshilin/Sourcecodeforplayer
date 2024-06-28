@@ -184,6 +184,7 @@ uint32_t FilterAudioData(LPFILTERINFO pFilter, int8_t* inData, uint32_t inLen, i
                 }
             }
         }
+            break;
         default:
             ret = 4;
             break;

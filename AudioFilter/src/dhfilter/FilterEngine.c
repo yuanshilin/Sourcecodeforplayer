@@ -6,6 +6,7 @@
 //
 
 #include "FilterEngine.h"
+#include "FilterLog.h"
 #include "cJSON.h"
 #include "equalizer_custom.h"
 #include "delay_processor.h"
@@ -23,8 +24,6 @@
 #define FALSE   0
 
 #define RECV_BUFFER_SIZE 10*1024
-
-#define Log_Debug printf
 
 typedef struct FilterEngine
 {
@@ -106,7 +105,7 @@ static int HandleReceivedBuffer(FilterEngine* fEngine, char* buffer)
         {
             param.enabled_channel_bit = channels->valueint;
         }
-        Log_Debug("HandleReceivedBuffer type: %d, freq: %d, Qfactor: %f, channels: 0x%x, gain: %f\r\n", param.type, param.centre_freq, param.quality_factor, param.enabled_channel_bit, param.dbgain);
+        LOGI("HandleReceivedBuffer type: %d, freq: %d, Qfactor: %f, channels: 0x%x, gain: %f\r\n", param.type, param.centre_freq, param.quality_factor, param.enabled_channel_bit, param.dbgain);
 
         AddFilter(fEngine, &param);
          
@@ -122,73 +121,94 @@ static void* ThreadRecvProcess(void* pData)
     fEngine->bDebug = TRUE;
 
     struct sockaddr_in address_client;
+    struct timeval timeout;
     int addr_client_len = sizeof(address_client);
     int new_socket = 0;
-    Log_Debug("socket fd: %d\r\n", fEngine->socketFD);
+    fd_set readfds;
+    int max_sd, activity;
+    LOGI("socket fd: %d\r\n", fEngine->socketFD);
     while (fEngine->bDebug)
     {
-        Log_Debug("\n+++++++ Waiting for new connection ++++++++\n\n");
-        new_socket = accept(fEngine->socketFD, (struct sockaddr *)&address_client, (socklen_t*)&addr_client_len);
-        Log_Debug("new socket fd: %d\r\n", new_socket);
-        if (new_socket < 0)
-        {
-            Log_Debug("In accept error, %d\r\n", errno);
-            usleep(2000);
-            continue;
-        }
-        
+        LOGD("\n+++++++ Waiting for new connection ++++++++\n\n");
+        // 清空读文件描述符集合
+        FD_ZERO(&readfds);
 
-        uint8_t buffer[RECV_BUFFER_SIZE] = {0};
-        uint8_t *temp = NULL;
-        int targetLength = 0;
-        int stringLength = 0;
-        int bAppend = 0;
-        do {
-            memset(buffer, 0, RECV_BUFFER_SIZE);
-            long valread = read( new_socket , buffer, RECV_BUFFER_SIZE);
-            Log_Debug("valread: %ld\n", valread);
-            if (valread > 0) {
-                if (buffer[0] == 0x24 && bAppend == 0) {
-                    targetLength = (buffer[2] << 8) + buffer[3];
-                    Log_Debug("target length: %d, 0x%x, 0x%x\n", targetLength, buffer[2], buffer[3]);
-                    if (valread == targetLength + 4) {
-                        if (fEngine->bDebug) {
-                            int ret = HandleReceivedBuffer(fEngine, (char*)buffer + 4);
-                            Log_Debug("HandleReceivedBuffer ret: %d\n", ret);
-                        }
-                        break;
-                    } else if (valread < targetLength + 4) {
-                        temp = malloc(targetLength+1);
-                        memset(temp, 0, targetLength+1);
-                        memcpy(temp, buffer+4, valread-4);
-                        stringLength += valread - 4;
-                        bAppend = 1;
-                    }
-                } else if (bAppend == 1) {
-                    memcpy(temp + stringLength, buffer, valread);
-                    stringLength += valread;
-                    if (stringLength == targetLength) {
-                        if (fEngine->bDebug) {
-                            int ret = HandleReceivedBuffer(fEngine, (char*)temp);
-                            Log_Debug("HandleReceivedBuffer ret: %d\n", ret);
-                        }
-                        break;
-                    } else if (stringLength > targetLength) {
-                        break;
-                    } else {
-                        continue;
-                    }
-                }
-            } else
-                break;
-        } while (1);
-        if (temp) {
-            free(temp);
-            temp = NULL;
+        // 将服务器套接字加入集合
+        FD_SET(fEngine->socketFD, &readfds);
+
+        max_sd = fEngine->socketFD;
+        // 使用select等待活动
+        timeout.tv_sec = 1;
+        timeout.tv_usec = 0;
+
+        activity = select(max_sd + 1, &readfds, NULL, NULL, &timeout);
+
+        if (activity < 0) {
+            LOGD("select activity: %d\r\n", activity);
+            break;
         }
-        close(new_socket);
+        if (FD_ISSET(fEngine->socketFD, &readfds))
+        {
+            new_socket = accept(fEngine->socketFD, (struct sockaddr *)&address_client, (socklen_t*)&addr_client_len);
+            LOGI("new socket fd: %d\r\n", new_socket);
+            if (new_socket < 0)
+            {
+                LOGE("In accept error, %d\r\n", errno);
+                break;
+            }
+
+            uint8_t buffer[RECV_BUFFER_SIZE] = {0};
+            uint8_t *temp = NULL;
+            int targetLength = 0;
+            int stringLength = 0;
+            int bAppend = 0;
+            do {
+                memset(buffer, 0, RECV_BUFFER_SIZE);
+                long valread = read( new_socket , buffer, RECV_BUFFER_SIZE);
+                LOGD("valread: %ld, fEngine->bDebug: %d\n", valread, fEngine->bDebug);
+                if (valread > 0) {
+                    if (buffer[0] == 0x24 && bAppend == 0) {
+                        targetLength = (buffer[2] << 8) + buffer[3];
+                        LOGD("target length: %d, 0x%x, 0x%x\n", targetLength, buffer[2], buffer[3]);
+                        if (valread == targetLength + 4) {
+                            if (fEngine->bDebug) {
+                                int ret = HandleReceivedBuffer(fEngine, (char*)buffer + 4);
+                                LOGI("HandleReceivedBuffer ret: %d\n", ret);
+                            }
+                            break;
+                        } else if (valread < targetLength + 4) {
+                            temp = malloc(targetLength+1);
+                            memset(temp, 0, targetLength+1);
+                            memcpy(temp, buffer+4, valread-4);
+                            stringLength += valread - 4;
+                            bAppend = 1;
+                        }
+                    } else if (bAppend == 1) {
+                        memcpy(temp + stringLength, buffer, valread);
+                        stringLength += valread;
+                        if (stringLength == targetLength) {
+                            if (fEngine->bDebug) {
+                                int ret = HandleReceivedBuffer(fEngine, (char*)temp);
+                                LOGI("HandleReceivedBuffer ret: %d\n", ret);
+                            }
+                            break;
+                        } else if (stringLength > targetLength) {
+                            break;
+                        } else {
+                            continue;
+                        }
+                    }
+                } else
+                    break;
+            } while (1);
+            if (temp) {
+                free(temp);
+                temp = NULL;
+            }
+            close(new_socket);
+        } 
     }
-    Log_Debug("thread end\r\n");
+    LOGI("thread end\r\n");
     return 0;
 }
 
@@ -268,7 +288,7 @@ void DestroyFilterEngine(void* pEngine)
         LPFilterEngine fEngine = (LPFilterEngine)pEngine;
 
         pthread_mutex_destroy(fEngine->pFilterMutex);
-
+        free(fEngine->pFilterMutex);
         free(fEngine);
     }
 }
@@ -278,7 +298,7 @@ void StartFilterEngine(void* pEngine, AudioParam* aParam, const char* configFile
     if (pEngine == NULL) {
         return;
     }
-    Log_Debug("StartFilterEngine %d, %d, %d\r\n", aParam->freq, aParam->channels, aParam->samples);
+    LOGI("StartFilterEngine %d, %d, %d\r\n", aParam->freq, aParam->channels, aParam->samples);
     LPFilterEngine fEngine = (LPFilterEngine)pEngine;
     memcpy(&fEngine->aParam, aParam, sizeof(AudioParam));
     
@@ -288,7 +308,7 @@ void StartFilterEngine(void* pEngine, AudioParam* aParam, const char* configFile
     memset(fEngine->tempbuffer, 0, tempLen);
     
     if (configFile != NULL) {
-        Log_Debug("config: %s\r\n", configFile);
+        LOGI("config: %s\r\n", configFile);
         ReadFromJsonFile(fEngine, configFile);
     }
 }
@@ -299,6 +319,7 @@ void StopFilterEngine(void* pEngine)
         return;
     }
     LPFilterEngine fEngine = (LPFilterEngine)pEngine;
+    LOGI("StopFilterEngine In bDebug: %d\r\n", fEngine->bDebug);
 
     if (fEngine->bDebug == TRUE) {
         StopDebug(fEngine);
@@ -324,9 +345,9 @@ void AddChannelDelays(void* pEngine, const float* channel_delays_ms)
     
     fEngine->pDelayProcessor = create_delay_processor();
     int ret = initialize_delay_processor(fEngine->pDelayProcessor, fEngine->aParam.freq, fEngine->aParam.channels, channel_delays_ms);
-    Log_Debug("AddChannelDelays init delay processor freq: %d, channels: %d, delay: %f, ret: %d\r\n", fEngine->aParam.freq, fEngine->aParam.channels, channel_delays_ms[0], ret);
+    LOGI("AddChannelDelays init delay processor freq: %d, channels: %d, delay: %f, ret: %d\r\n", fEngine->aParam.freq, fEngine->aParam.channels, channel_delays_ms[0], ret);
     if (ret != 0) {
-        Log_Debug("Failed to initialize delay processor. ret: %d\n", ret);
+        LOGE("Failed to initialize delay processor. ret: %d\n", ret);
         destroy_delay_processor(fEngine->pDelayProcessor);
         fEngine->pDelayProcessor = NULL;
     } else {
@@ -346,6 +367,7 @@ void AddFilter(void* pEngine, EqulizerParam* eqParam)
     pthread_mutex_lock(fEngine->pFilterMutex);
     LPFILTERINFO filter = InitFilter(&fEngine->aParam, eqParam);
     fEngine->pFilters[fEngine->filterCount++] = filter;
+    LOGD("AddFilter type: %d, count: %d\r\n", filter->type.type, fEngine->filterCount);
     pthread_mutex_unlock(fEngine->pFilterMutex);
 }
 
@@ -379,7 +401,10 @@ int8_t* FilterAudio(void* pEngine, int8_t* inData, uint32_t inLen)
         int8_t* pIn = inData;
         for (int i = 0; i < fEngine->filterCount; i++) {
             LPFILTERINFO pFilter = fEngine->pFilters[i];
-            FilterAudioData(pFilter, pIn, inLen, fEngine->tempbuffer);
+            int ret = FilterAudioData(pFilter, pIn, inLen, fEngine->tempbuffer);
+            if (ret != 0) {
+                LOGE("FilterAudioData ret: %d\r\n", ret);
+            }
             pIn = fEngine->tempbuffer;
         }
         outData = fEngine->tempbuffer;
@@ -399,7 +424,7 @@ int8_t* FilterAudio(void* pEngine, int8_t* inData, uint32_t inLen)
 
         int ret = process_audio(fEngine->pDelayProcessor, input_data, output_data, fEngine->aParam.samples);
         if (ret != 0) {
-            Log_Debug("Failed to process audio. ret: %d\r\n", ret);
+            LOGE("Failed to process audio. ret: %d\r\n", ret);
             ReleaseDelayProcessor(fEngine);
         } else {
             for (int ch = 0;ch < fEngine->aParam.channels; ch++) {
@@ -427,20 +452,24 @@ void StartDebug(void* pEngine)
     address.sin_port = htons( PORT );
 
     fEngine->socketFD = socket(AF_INET, SOCK_STREAM, 0);
-    Log_Debug("StartDebug socket fd : %d\r\n", fEngine->socketFD);
+    LOGI("StartDebug socket fd : %d\r\n", fEngine->socketFD);
     if (fEngine->socketFD == 0) {
-        Log_Debug("StartDebug() create socket error\n");
+        LOGE("StartDebug() create socket error, %d(%s)\n", errno, strerror(errno));
         return;
     }
+    int reuse = 1;
+    setsockopt(fEngine->socketFD, SOL_SOCKET, SO_REUSEPORT, (const void *)&reuse, sizeof(int));
+    setsockopt(fEngine->socketFD, SOL_SOCKET, SO_REUSEADDR, (const void *)&reuse, sizeof(int));
+
     if (bind(fEngine->socketFD, (struct sockaddr *)&address, sizeof(address))<0)
     {
-        Log_Debug("StartDebug() bind socket error, %d\n", errno);
+        LOGE("StartDebug() bind socket error, %d(%s)\n", errno, strerror(errno));
         close(fEngine->socketFD);
         return;
     }
     if (listen(fEngine->socketFD, 10) < 0)
     {
-        Log_Debug("StartDebug() listen socket error, %d\n", errno);
+        LOGE("StartDebug() listen socket error, %d(%s)\n", errno, strerror(errno));
         close(fEngine->socketFD);
         return;
     }
@@ -458,10 +487,10 @@ void StopDebug(void* pEngine)
         return;
     }
     LPFilterEngine fEngine = (LPFilterEngine)pEngine;
+    LOGI("StopDebug In bDebug: %d, fEngine->socketFD: %d\r\n", fEngine->bDebug, fEngine->socketFD);
 
     fEngine->bDebug = FALSE;
-    if (fEngine->socketFD) {
-        shutdown(fEngine->socketFD, SHUT_RDWR);
+    if (fEngine->socketFD > 0) {
         close(fEngine->socketFD);
     }
 }

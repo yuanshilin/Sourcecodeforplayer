@@ -24,7 +24,7 @@
 #define LABEL_HEIGHT 20.0f
 #define MARGIN 10.0f
 
-#define MAX_CHANGED_GAIN 6.0f
+#define MAX_CHANGED_GAIN 10.0f
 
 #define Table_Width 330.0f
 
@@ -397,8 +397,8 @@ static int freqs[] = {20,25,31,40,50,63,80,100,118, 156,196,264,326, 408,524,641
 - (void)sendToServer: (NSString*)string {
     
     NSLog(@"ip: %@, port: %@, string length: %lu", self.ipText.stringValue, self.portText.stringValue, string.length);
-    struct sockaddr_in serverAdd;
-    
+    struct sockaddr_in serverAdd, loc_addr;
+
     bzero(&serverAdd, sizeof(serverAdd));
     serverAdd.sin_family = AF_INET;
     serverAdd.sin_addr.s_addr = inet_addr([self.ipText.stringValue UTF8String]);
@@ -411,7 +411,7 @@ static int freqs[] = {20,25,31,40,50,63,80,100,118, 156,196,264,326, 408,524,641
         int err = errno;
         printf("连接失败，errno ＝ %d\n", err);
         NSAlert* alert = [[NSAlert alloc] init];
-        alert.messageText = [NSString stringWithFormat:@"连接失败，errno ＝ %d", err];
+        alert.messageText = [NSString stringWithFormat:@"连接失败，errno ＝ %d(%s)", err, strerror(err)];
         [alert addButtonWithTitle:@"OK"];
         [alert runModal];
         
@@ -422,6 +422,24 @@ static int freqs[] = {20,25,31,40,50,63,80,100,118, 156,196,264,326, 408,524,641
     else
     {
         printf("连接成功\n");
+        
+        socklen_t len = sizeof(sizeof(loc_addr));
+        memset(&loc_addr, 0, len);
+        if (-1 == getsockname(connfd, (struct sockaddr *)&loc_addr, &len)) {// 获取socket绑定的本地address信息
+            int err = errno;
+            NSAlert* alert = [[NSAlert alloc] init];
+            alert.messageText = [NSString stringWithFormat:@"get socket name failed，errno ＝ %d(%s)", err, strerror(err)];
+            [alert addButtonWithTitle:@"OK"];
+            [alert runModal];
+            close(connfd);
+            exit(-1);
+        } else {
+            printf("local port ＝ %d\r\n", ntohs(loc_addr.sin_port));
+//            NSAlert* alert = [[NSAlert alloc] init];
+//            alert.messageText = [NSString stringWithFormat:@"local port ＝ %d", ntohs(loc_addr.sin_port)];
+//            [alert addButtonWithTitle:@"OK"];
+//            [alert runModal];
+        }
     }
     
     ssize_t writeLen;
