@@ -32,7 +32,7 @@ typedef enum
 typedef struct AudioParam
 {
     int freq;           //  采样率
-    uint16_t format;    //  数据格式
+    uint16_t format;    //  数据格式（只支持16或32）
     uint16_t samples;   //  一块音频数据的采样点数
     uint8_t  channels;  //  声道数
 }AudioParam;
