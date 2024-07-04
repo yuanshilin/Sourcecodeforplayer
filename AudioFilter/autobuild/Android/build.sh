@@ -6,7 +6,7 @@ cd ../../
 WORKSPACE=$(cd "$dirname "$0")";pwd)
 REVISION=$(git log --format="%h" -n 1 )
 BUILD_ID=`date +%Y%m%d`
-APP_ABIs="arm64-v8a"
+APP_ABIs="arm64-v8a armeabi-v7a"
 
 mkdir -p $WORKSPACE/delivery
 mkdir -p $WORKSPACE/delivery/Filter
@@ -20,7 +20,7 @@ do
 mkdir -p $WORKSPACE/delivery/Filter/lib/Android/${APP_ABI}
 cd $WORKSPACE/makefile/android
 make -f makefile_so clean
-make -f makefile_so
+make -f makefile_so APP_ABI=${APP_ABI}
 cp -f $WORKSPACE/output/android/${APP_ABI}/libdhfilter.so $WORKSPACE/delivery/Filter/lib/Android/${APP_ABI}/
 cp -f $WORKSPACE/dependency/lib/android/${APP_ABI}/libcjson.so $WORKSPACE/delivery/Filter/lib/Android/${APP_ABI}/
 done

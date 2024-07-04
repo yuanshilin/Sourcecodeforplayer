@@ -1,15 +1,18 @@
 
 NDK=/Applications/android-ndk-r20b
 TOOLCHAIN=$(NDK)/toolchains/llvm/prebuilt/darwin-x86_64
-ARCH=arm64
-CPU=armv8-a
+
 API:=24
+ifeq ($(APP_ABI), arm64-v8a)
 CC=$(TOOLCHAIN)/bin/aarch64-linux-android$(API)-clang
 CXX=$(TOOLCHAIN)/bin/aarch64-linux-android$(API)-clang++
-
+else
+CC=$(TOOLCHAIN)/bin/armv7a-linux-androideabi$(API)-clang
+CXX=$(TOOLCHAIN)/bin/armv7a-linux-androideabi$(API)-clang++
+endif
 SRC_DIRS=../../src/cjson
 SRC=$(foreach TMP_SRC_DIRS, $(SRC_DIRS), $(wildcard $(TMP_SRC_DIRS)/*.c))
-TARGET=../../lib/android/arm64-v8a/libcjson.so
+TARGET=../../lib/android/$(APP_ABI)/libcjson.so
 OBJ:=$(SRC:.c=.o)
 
 INC_EXTERN=-I../../src/cjson
