@@ -28,19 +28,19 @@
 typedef struct FilterEngine
 {
     AudioParam  aParam;
-    void*       pFilters[MAX_FILTER_SIZE];
-    void*       tempbuffer;
-    void*       pDelayProcessor;
-    short*      pDelayOut;
-    int         filterCount;
+    MVoid*      pFilters[MAX_FILTER_SIZE];
+    MVoid*      tempbuffer;
+    MVoid*      pDelayProcessor;
+    MInt16*     pDelayOut;
+    MInt32      filterCount;
     pthread_mutex_t* pFilterMutex;
     
-    int         bDebug;
-    int         socketFD;
+    MInt32      bDebug;
+    MInt32      socketFD;
     
 }FilterEngine, *LPFilterEngine;
 
-static int HandleReceivedBuffer(FilterEngine* fEngine, char* buffer)
+static MInt32 HandleReceivedBuffer(FilterEngine* fEngine, MInt8* buffer)
 {
     cJSON* root = cJSON_Parse(buffer);
     if (!root)
@@ -54,8 +54,8 @@ static int HandleReceivedBuffer(FilterEngine* fEngine, char* buffer)
         return -1;
     }
     ResetFilter(fEngine);
-    int arraySize = cJSON_GetArraySize(filters);
-    for (int i = 0; i < arraySize; i++)
+    MInt32 arraySize = cJSON_GetArraySize(filters);
+    for (MInt32 i = 0; i < arraySize; i++)
     {
         cJSON* item = cJSON_GetArrayItem(filters, i);
         if (!item)
@@ -69,10 +69,10 @@ static int HandleReceivedBuffer(FilterEngine* fEngine, char* buffer)
             continue;
         }
         if (type->valueint == Filter_Type_Delay) {
-            int channels = fEngine->aParam.channels;
-            float *channel_delays_ms = (float*)calloc(channels, sizeof(float));
-            char key[10] = "";
-            for (int i = 0; i < channels; i++) {
+            MInt32 channels = fEngine->aParam.channels;
+            MFloat *channel_delays_ms = (MFloat*)calloc(channels, sizeof(MFloat));
+            MInt8 key[10] = "";
+            for (MInt32 i = 0; i < channels; i++) {
                 sprintf(key, "channel%d", i+1);
                 cJSON *channel = cJSON_GetObjectItem(item, key);
                 if (channel) {
@@ -114,7 +114,7 @@ static int HandleReceivedBuffer(FilterEngine* fEngine, char* buffer)
     cJSON_Delete(root);
     return 0;
 }
-static void* ThreadRecvProcess(void* pData)
+static MVoid* ThreadRecvProcess(MVoid* pData)
 {
     FilterEngine* fEngine = (FilterEngine*)pData;
 
@@ -122,10 +122,10 @@ static void* ThreadRecvProcess(void* pData)
 
     struct sockaddr_in address_client;
     struct timeval timeout;
-    int addr_client_len = sizeof(address_client);
-    int new_socket = 0;
+    MInt32 addr_client_len = sizeof(address_client);
+    MInt32 new_socket = 0;
     fd_set readfds;
-    int max_sd, activity;
+    MInt32 max_sd, activity;
     LOGI("socket fd: %d\r\n", fEngine->socketFD);
     while (fEngine->bDebug)
     {
@@ -157,14 +157,14 @@ static void* ThreadRecvProcess(void* pData)
                 break;
             }
 
-            uint8_t buffer[RECV_BUFFER_SIZE] = {0};
-            uint8_t *temp = NULL;
-            int targetLength = 0;
-            int stringLength = 0;
-            int bAppend = 0;
+            MUInt8 buffer[RECV_BUFFER_SIZE] = {0};
+            MUInt8 *temp = NULL;
+            MInt32 targetLength = 0;
+            MInt32 stringLength = 0;
+            MInt32 bAppend = 0;
             do {
                 memset(buffer, 0, RECV_BUFFER_SIZE);
-                long valread = read( new_socket , buffer, RECV_BUFFER_SIZE);
+                MInt64 valread = read( new_socket , buffer, RECV_BUFFER_SIZE);
                 LOGD("valread: %ld, fEngine->bDebug: %d\n", valread, fEngine->bDebug);
                 if (valread > 0) {
                     if (buffer[0] == 0x24 && bAppend == 0) {
@@ -172,7 +172,7 @@ static void* ThreadRecvProcess(void* pData)
                         LOGD("target length: %d, 0x%x, 0x%x\n", targetLength, buffer[2], buffer[3]);
                         if (valread == targetLength + 4) {
                             if (fEngine->bDebug) {
-                                int ret = HandleReceivedBuffer(fEngine, (char*)buffer + 4);
+                                MInt32 ret = HandleReceivedBuffer(fEngine, (MInt8*)buffer + 4);
                                 LOGI("HandleReceivedBuffer ret: %d\n", ret);
                             }
                             break;
@@ -188,7 +188,7 @@ static void* ThreadRecvProcess(void* pData)
                         stringLength += valread;
                         if (stringLength == targetLength) {
                             if (fEngine->bDebug) {
-                                int ret = HandleReceivedBuffer(fEngine, (char*)temp);
+                                MInt32 ret = HandleReceivedBuffer(fEngine, (char*)temp);
                                 LOGI("HandleReceivedBuffer ret: %d\n", ret);
                             }
                             break;
@@ -229,7 +229,7 @@ static LPFILTERINFO InitFilter(AudioParam *aParam, EqulizerParam* param)
     return filter;
 }
 
-static void ReleaseDelayProcessor(LPFilterEngine fEngine)
+static MVoid ReleaseDelayProcessor(LPFilterEngine fEngine)
 {
     if (fEngine == NULL) {
         return;
@@ -244,17 +244,17 @@ static void ReleaseDelayProcessor(LPFilterEngine fEngine)
     }
 }
 
-void ReadFromJsonFile(LPFilterEngine fEngine, const char* filepath)
+MVoid ReadFromJsonFile(LPFilterEngine fEngine, const MInt8* filepath)
 {
     FILE* fp = fopen(filepath, "r");
     if (fp) {
         fseek(fp, 0, SEEK_END);
-        long length = ftell(fp);
-        char* buffer = malloc(length + 1);
+        MInt64 length = ftell(fp);
+        MInt8* buffer = malloc(length + 1);
         memset(buffer, 0, length + 1);
         
         fseek(fp, 0, SEEK_SET);
-        size_t read = fread(buffer, 1, length, fp);
+        MInt64 read = fread(buffer, 1, length, fp);
         if (read == length) {
             HandleReceivedBuffer(fEngine, buffer);
         }
@@ -263,7 +263,7 @@ void ReadFromJsonFile(LPFilterEngine fEngine, const char* filepath)
     }
 }
 
-void CreateFilterEngine(void** pEngine)
+MVoid CreateFilterEngine(MVoid** pEngine)
 {
     LPFilterEngine engine = (LPFilterEngine)malloc(sizeof(FilterEngine));
     memset(engine, 0, sizeof(FilterEngine));
@@ -282,7 +282,7 @@ void CreateFilterEngine(void** pEngine)
     *pEngine = engine;
 }
 
-void DestroyFilterEngine(void* pEngine)
+MVoid DestroyFilterEngine(MVoid* pEngine)
 {
     if (pEngine) {
         LPFilterEngine fEngine = (LPFilterEngine)pEngine;
@@ -293,7 +293,7 @@ void DestroyFilterEngine(void* pEngine)
     }
 }
 
-void StartFilterEngine(void* pEngine, AudioParam* aParam, const char* configFile)
+MVoid StartFilterEngine(MVoid* pEngine, AudioParam* aParam, const MInt8* configFile)
 {
     if (pEngine == NULL) {
         return;
@@ -302,7 +302,7 @@ void StartFilterEngine(void* pEngine, AudioParam* aParam, const char* configFile
     LPFilterEngine fEngine = (LPFilterEngine)pEngine;
     memcpy(&fEngine->aParam, aParam, sizeof(AudioParam));
     
-    int tempLen = aParam->samples * aParam->channels * 10;
+    MInt32 tempLen = aParam->samples * aParam->channels * 10;
     if (fEngine->tempbuffer == NULL)
         fEngine->tempbuffer = malloc(tempLen);
     memset(fEngine->tempbuffer, 0, tempLen);
@@ -313,7 +313,7 @@ void StartFilterEngine(void* pEngine, AudioParam* aParam, const char* configFile
     }
 }
 
-void StopFilterEngine(void* pEngine)
+MVoid StopFilterEngine(MVoid* pEngine)
 {
     if (pEngine == NULL) {
         return;
@@ -334,7 +334,7 @@ void StopFilterEngine(void* pEngine)
     }
 }
 
-void AddChannelDelays(void* pEngine, const float* channel_delays_ms)
+MVoid AddChannelDelays(MVoid* pEngine, const MFloat* channel_delays_ms)
 {
     if (pEngine == NULL) {
         return;
@@ -344,20 +344,20 @@ void AddChannelDelays(void* pEngine, const float* channel_delays_ms)
     ReleaseDelayProcessor(fEngine);
     
     fEngine->pDelayProcessor = create_delay_processor();
-    int ret = initialize_delay_processor(fEngine->pDelayProcessor, fEngine->aParam.freq, fEngine->aParam.channels, channel_delays_ms);
+    MInt32 ret = initialize_delay_processor(fEngine->pDelayProcessor, fEngine->aParam.freq, fEngine->aParam.channels, channel_delays_ms);
     LOGI("AddChannelDelays init delay processor freq: %d, channels: %d, delay: %f, ret: %d\r\n", fEngine->aParam.freq, fEngine->aParam.channels, channel_delays_ms[0], ret);
     if (ret != 0) {
         LOGE("Failed to initialize delay processor. ret: %d\n", ret);
         destroy_delay_processor(fEngine->pDelayProcessor);
         fEngine->pDelayProcessor = NULL;
     } else {
-        int delayOutSize = fEngine->aParam.channels * fEngine->aParam.samples;
-        fEngine->pDelayOut = (short*)calloc(delayOutSize, sizeof(short));
-        memset(fEngine->pDelayOut, 0, delayOutSize * sizeof(short));
+        MInt32 delayOutSize = fEngine->aParam.channels * fEngine->aParam.samples;
+        fEngine->pDelayOut = (MInt16*)calloc(delayOutSize, sizeof(MInt16));
+        memset(fEngine->pDelayOut, 0, delayOutSize * sizeof(MInt16));
     }
 }
 
-void AddFilter(void* pEngine, EqulizerParam* eqParam)
+MVoid AddFilter(MVoid* pEngine, EqulizerParam* eqParam)
 {
     if (pEngine == NULL) {
         return;
@@ -371,7 +371,7 @@ void AddFilter(void* pEngine, EqulizerParam* eqParam)
     pthread_mutex_unlock(fEngine->pFilterMutex);
 }
 
-void ResetFilter(void* pEngine)
+MVoid ResetFilter(MVoid* pEngine)
 {
     if (pEngine == NULL) {
         return;
@@ -379,7 +379,7 @@ void ResetFilter(void* pEngine)
     LPFilterEngine fEngine = (LPFilterEngine)pEngine;
 
     pthread_mutex_lock(fEngine->pFilterMutex);
-    for (int i = 0; i < fEngine->filterCount; i++) {
+    for (MInt32 i = 0; i < fEngine->filterCount; i++) {
         LPFILTERINFO filter = fEngine->pFilters[i];
         free(filter);
         fEngine->pFilters[i] = NULL;
@@ -388,20 +388,20 @@ void ResetFilter(void* pEngine)
     pthread_mutex_unlock(fEngine->pFilterMutex);
 }
 
-int8_t* FilterAudio(void* pEngine, int8_t* inData, uint32_t inLen)
+MInt8* FilterAudio(MVoid* pEngine, MInt8* inData, MUInt32 inLen)
 {
     if (pEngine == NULL) {
         return inData;
     }
     LPFilterEngine fEngine = (LPFilterEngine)pEngine;
 
-    int8_t* outData = NULL;
+    MInt8* outData = NULL;
     if (fEngine->filterCount > 0) {
         pthread_mutex_lock(fEngine->pFilterMutex);
-        int8_t* pIn = inData;
+        MInt8* pIn = inData;
         for (int i = 0; i < fEngine->filterCount; i++) {
             LPFILTERINFO pFilter = fEngine->pFilters[i];
-            int ret = FilterAudioData(pFilter, pIn, inLen, fEngine->tempbuffer);
+            MUInt32 ret = FilterAudioData(pFilter, pIn, inLen, fEngine->tempbuffer);
             if (ret != 0) {
                 LOGE("FilterAudioData ret: %d\r\n", ret);
             }
@@ -413,32 +413,32 @@ int8_t* FilterAudio(void* pEngine, int8_t* inData, uint32_t inLen)
         outData = inData;
     }
     if (fEngine->pDelayProcessor) {
-        short input_data[fEngine->aParam.channels][fEngine->aParam.samples];
-        short output_data[fEngine->aParam.channels][fEngine->aParam.samples];
-        short *inbuf = (short*)outData;
-        for (int ch = 0;ch < fEngine->aParam.channels; ch++) {
-            for (int i = 0; i < fEngine->aParam.samples; i++) {
+        MInt16 input_data[fEngine->aParam.channels][fEngine->aParam.samples];
+        MInt16 output_data[fEngine->aParam.channels][fEngine->aParam.samples];
+        MInt16 *inbuf = (MInt16*)outData;
+        for (MInt32 ch = 0;ch < fEngine->aParam.channels; ch++) {
+            for (MInt32 i = 0; i < fEngine->aParam.samples; i++) {
                 input_data[ch][i] = inbuf[fEngine->aParam.channels *i + ch];
             }
         }
 
-        int ret = process_audio(fEngine->pDelayProcessor, input_data, output_data, fEngine->aParam.samples);
+        MInt32 ret = process_audio(fEngine->pDelayProcessor, input_data, output_data, fEngine->aParam.samples);
         if (ret != 0) {
             LOGE("Failed to process audio. ret: %d\r\n", ret);
             ReleaseDelayProcessor(fEngine);
         } else {
-            for (int ch = 0;ch < fEngine->aParam.channels; ch++) {
-                for (int i = 0; i < fEngine->aParam.samples; i++) {
+            for (MInt32 ch = 0;ch < fEngine->aParam.channels; ch++) {
+                for (MInt32 i = 0; i < fEngine->aParam.samples; i++) {
                     fEngine->pDelayOut[fEngine->aParam.channels *i + ch] = output_data[ch][i];
                 }
             }
-            outData = (int8_t*)fEngine->pDelayOut;
+            outData = (MInt8*)fEngine->pDelayOut;
         }
     }
     return outData;
 }
 
-void StartDebug(void* pEngine)
+MVoid StartDebug(MVoid* pEngine)
 {
     if (pEngine == NULL) {
         return;
@@ -457,9 +457,9 @@ void StartDebug(void* pEngine)
         LOGE("StartDebug() create socket error, %d(%s)\n", errno, strerror(errno));
         return;
     }
-    int reuse = 1;
-    setsockopt(fEngine->socketFD, SOL_SOCKET, SO_REUSEPORT, (const void *)&reuse, sizeof(int));
-    setsockopt(fEngine->socketFD, SOL_SOCKET, SO_REUSEADDR, (const void *)&reuse, sizeof(int));
+    MInt32 reuse = 1;
+    setsockopt(fEngine->socketFD, SOL_SOCKET, SO_REUSEPORT, (const MVoid *)&reuse, sizeof(int));
+    setsockopt(fEngine->socketFD, SOL_SOCKET, SO_REUSEADDR, (const MVoid *)&reuse, sizeof(int));
 
     if (bind(fEngine->socketFD, (struct sockaddr *)&address, sizeof(address))<0)
     {
@@ -474,14 +474,14 @@ void StartDebug(void* pEngine)
         return;
     }
     pthread_t thread;
-    int ret = pthread_create(&thread, NULL, ThreadRecvProcess, fEngine);
+    MInt32 ret = pthread_create(&thread, NULL, ThreadRecvProcess, fEngine);
     if (ret == 0) {
         pthread_detach(thread);
     }
 
 }
 
-void StopDebug(void* pEngine)
+MVoid StopDebug(MVoid* pEngine)
 {
     if (pEngine == NULL) {
         return;

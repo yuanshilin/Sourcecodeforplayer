@@ -8,7 +8,8 @@
 #ifndef FilterEngine_h
 #define FilterEngine_h
 
-#include <stdint.h>
+
+#include "FilterTypes.h"
 
 #define MAX_FILTER_SIZE 128
 
@@ -31,37 +32,37 @@ typedef enum
 
 typedef struct AudioParam
 {
-    int freq;           //  采样率
-    uint16_t format;    //  数据格式（只支持16或32）
-    uint16_t samples;   //  一块音频数据的采样点数
-    uint8_t  channels;  //  声道数
+    MInt32  freq;           //  采样率
+    MUInt16 format;    //  数据格式（只支持16或32）
+    MUInt16 samples;   //  一块音频数据的采样点数
+    MUInt8  channels;  //  声道数
 }AudioParam;
 
 typedef struct EqulizerParam
 {
     Filter_Type type;                   // 滤波器类型
-    uint32_t    centre_freq;            // 滤波中心频率
-    float       dbgain;                 // 增益
-    float       quality_factor;         // 品质因子
-    uint16_t    enabled_channel_bit;    /*  需要滤波的声道位置，最多支持16声道，
+    MUInt32    centre_freq;            // 滤波中心频率
+    MFloat       dbgain;                 // 增益
+    MFloat       quality_factor;         // 品质因子
+    MUInt16    enabled_channel_bit;    /*  需要滤波的声道位置，最多支持16声道，
                                             例如0b1010101011100011，
                                             从低位到高位依次表示第1、2、3...16位的声道是否需要滤波，
                                             值为1表示该声道需要滤波，值为0表示该声道不需要滤波，
                                             超过声道数的位不做处理，如声道数为6，则只需处理最低6位的值 */
 }EqulizerParam;
 
-void CreateFilterEngine(void** pEngine);
-void DestroyFilterEngine(void* pEngine);
-void StartFilterEngine(void* pEngine, AudioParam* aParam, const char* configFile);
-void StopFilterEngine(void* pEngine);
-void AddChannelDelays(void* pEngine, const float* channel_delays_ms);
-void AddFilter(void* pEngine, EqulizerParam* eqParam);
-void ResetFilter(void* pEngine);
+MVoid CreateFilterEngine(MVoid** pEngine);
+MVoid DestroyFilterEngine(MVoid* pEngine);
+MVoid StartFilterEngine(MVoid* pEngine, AudioParam* aParam, const MInt8* configFile);
+MVoid StopFilterEngine(MVoid* pEngine);
+MVoid AddChannelDelays(MVoid* pEngine, const MFloat* channel_delays_ms);
+MVoid AddFilter(MVoid* pEngine, EqulizerParam* eqParam);
+MVoid ResetFilter(MVoid* pEngine);
  
-int8_t* FilterAudio(void* pEngine, int8_t* inData, uint32_t inLen);
+MInt8* FilterAudio(MVoid* pEngine, MInt8* inData, MUInt32 inLen);
 
-void StartDebug(void* pEngine);
-void StopDebug(void* pEngine);
+MVoid StartDebug(MVoid* pEngine);
+MVoid StopDebug(MVoid* pEngine);
 
 
 #endif /* FilterEngine_h */

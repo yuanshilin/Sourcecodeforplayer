@@ -28,7 +28,8 @@
 
 #define Table_Width 330.0f
 
-static int freqs[] = {20,25,31,40,50,63,80,100,118, 156,196,264,326, 408,524,641,800,998,1322,1579, 2000,2477,3150, 4000, 5000, 6300,8000, 10000, 12500, 16000, 20000};
+//static int freqs[] = {20,25,31,40,50,63,80,100,118, 156,196,264,326, 408,524,641,800,998,1322,1579, 2000,2477,3150, 4000, 5000, 6300,8000, 10000, 12500, 16000, 20000}; // 31段均衡器
+static int freqs[] = {31,62,125,200,315,500,1250,2000,4000,8000,16000}; // 11段均衡器
 
 @interface ViewController ()<NSTextViewDelegate, AddFilterParamDelegate, AddSepChannelParamDelegate, ChangePositionDelegate>
 
@@ -488,7 +489,7 @@ static int freqs[] = {20,25,31,40,50,63,80,100,118, 156,196,264,326, 408,524,641
     if (freq < 20) {
         
     }
-    else if (freq < 4000) {
+    else if (freq < 2000) {
         string = [NSString stringWithFormat:@"%d", freq];
     } else {
         float f = (float)freq / 1000;

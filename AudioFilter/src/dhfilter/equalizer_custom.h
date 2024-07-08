@@ -10,32 +10,32 @@
 
 #include <stdio.h>
 #include <math.h>
-#include <stdint.h>
+#include "FilterTypes.h"
 
 typedef struct
 {
-    uint16_t type;
-    float fl;
+    MUInt16 type;
+    MFloat fl;
 }FILTERTYPE;  // 滤波器类型
 
 typedef struct
 {
     FILTERTYPE type;
-    uint8_t sampleSize;
-    uint8_t channels;
-    uint16_t enabled_channel_bit;
-    uint32_t freq; // 采样率
-    float dbgain; // 增益
-    float q;  // 品质因子
-    float amp; // 幅值
-    float a[3]; // a0,a1,a2
-    float b[3]; // b0,b1,b2
-    float x[3]; // x(n),x(n-1),x(n-2)
-    float y[2]; // y(n-1),y(n-2)
+    MUInt8 sampleSize;
+    MUInt8 channels;
+    MUInt16 enabled_channel_bit;
+    MUInt32 freq; // 采样率
+    MFloat dbgain; // 增益
+    MFloat q;  // 品质因子
+    MFloat amp; // 幅值
+    MFloat a[3]; // a0,a1,a2
+    MFloat b[3]; // b0,b1,b2
+    MFloat x[3]; // x(n),x(n-1),x(n-2)
+    MFloat y[2]; // y(n-1),y(n-2)
 }FILTERINFO, *LPFILTERINFO;
 
-void Init_Filter(LPFILTERINFO pFilter);
-uint32_t FilterAudioData(LPFILTERINFO pFilter, int8_t* inData, uint32_t inLen, int8_t* outData);
-float Limiter(LPFILTERINFO pFilter, float inData);
+MVoid Init_Filter(LPFILTERINFO pFilter);
+MUInt32 FilterAudioData(LPFILTERINFO pFilter, MInt8* inData, MUInt32 inLen, MInt8* outData);
+MFloat Limiter(LPFILTERINFO pFilter, MFloat inData);
 
 #endif /* equalizer_h */
