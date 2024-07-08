@@ -93,7 +93,7 @@ MInt32 process_audio(DelayProcessorHandle handle,
 void destroy_delay_processor(DelayProcessorHandle handle) {
     struct DelayProcessor* dp = (struct DelayProcessor*) handle;
     if (dp != NULL) {
-        for (MInt32 i = 0; i < dp->num_channels; i++) {
+        for (MUInt32 i = 0; i < dp->num_channels; i++) {
             if (dp->delay_lines[i]) {
                 free(dp->delay_lines[i]);
                 dp->delay_lines[i] = NULL;

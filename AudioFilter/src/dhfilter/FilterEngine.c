@@ -42,7 +42,7 @@ typedef struct FilterEngine
 
 static MInt32 HandleReceivedBuffer(FilterEngine* fEngine, MInt8* buffer)
 {
-    cJSON* root = cJSON_Parse(buffer);
+    cJSON* root = cJSON_Parse((const char*)buffer);
     if (!root)
     {
         return -1;
@@ -73,8 +73,8 @@ static MInt32 HandleReceivedBuffer(FilterEngine* fEngine, MInt8* buffer)
             MFloat *channel_delays_ms = (MFloat*)calloc(channels, sizeof(MFloat));
             MInt8 key[10] = "";
             for (MInt32 i = 0; i < channels; i++) {
-                sprintf(key, "channel%d", i+1);
-                cJSON *channel = cJSON_GetObjectItem(item, key);
+                sprintf((char*)key, "channel%d", i+1);
+                cJSON *channel = cJSON_GetObjectItem(item, (const char * const)key);
                 if (channel) {
                     channel_delays_ms[i] = channel->valuedouble;
                 } else {
@@ -165,7 +165,7 @@ static MVoid* ThreadRecvProcess(MVoid* pData)
             do {
                 memset(buffer, 0, RECV_BUFFER_SIZE);
                 MInt64 valread = read( new_socket , buffer, RECV_BUFFER_SIZE);
-                LOGD("valread: %ld, fEngine->bDebug: %d\n", valread, fEngine->bDebug);
+                LOGD("valread: %lld, fEngine->bDebug: %d\n", valread, fEngine->bDebug);
                 if (valread > 0) {
                     if (buffer[0] == 0x24 && bAppend == 0) {
                         targetLength = (buffer[2] << 8) + buffer[3];
@@ -188,7 +188,7 @@ static MVoid* ThreadRecvProcess(MVoid* pData)
                         stringLength += valread;
                         if (stringLength == targetLength) {
                             if (fEngine->bDebug) {
-                                MInt32 ret = HandleReceivedBuffer(fEngine, (char*)temp);
+                                MInt32 ret = HandleReceivedBuffer(fEngine, (MInt8*)temp);
                                 LOGI("HandleReceivedBuffer ret: %d\n", ret);
                             }
                             break;
@@ -246,7 +246,7 @@ static MVoid ReleaseDelayProcessor(LPFilterEngine fEngine)
 
 MVoid ReadFromJsonFile(LPFilterEngine fEngine, const MInt8* filepath)
 {
-    FILE* fp = fopen(filepath, "r");
+    FILE* fp = fopen((const char *)filepath, "r");
     if (fp) {
         fseek(fp, 0, SEEK_END);
         MInt64 length = ftell(fp);
