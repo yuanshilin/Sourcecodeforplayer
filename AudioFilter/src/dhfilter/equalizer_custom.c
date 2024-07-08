@@ -147,8 +147,8 @@ MUInt32 FilterAudioData(LPFILTERINFO pFilter, MInt8* inData, MUInt32 inLen, MInt
             MInt16* dst = (MInt16*)outData;
             MUInt32 srcLen = inLen * sizeof(MInt8) / sizeof(MInt16);
             MUInt32 blocks = srcLen / pFilter->channels;
-            for (MInt32 i = 0; i < blocks; i++) {
-                for (MInt32 j = 0; j < pFilter->channels; j++) {
+            for (MUInt32 i = 0; i < blocks; i++) {
+                for (MUInt32 j = 0; j < pFilter->channels; j++) {
                     MUInt16 b = pFilter->enabled_channel_bit & (1 << j);
                     if (b) {
                         MInt16 temp = src[i*pFilter->channels + j];
@@ -169,8 +169,8 @@ MUInt32 FilterAudioData(LPFILTERINFO pFilter, MInt8* inData, MUInt32 inLen, MInt
             MInt32* dst = (MInt32*)outData;
             MUInt32 srcLen = inLen * sizeof(MInt8) / sizeof(MInt32);
             MUInt32 blocks = srcLen / pFilter->channels;
-            for (MInt32 i = 0; i < blocks; i++) {
-                for (MInt32 j = 0; j < pFilter->channels; j++) {
+            for (MUInt32 i = 0; i < blocks; i++) {
+                for (MUInt32 j = 0; j < pFilter->channels; j++) {
                     MUInt16 b = pFilter->enabled_channel_bit & (1 << j);
                     if (b) {
                         MInt32 temp = src[i*pFilter->channels + j];
@@ -194,6 +194,8 @@ MUInt32 FilterAudioData(LPFILTERINFO pFilter, MInt8* inData, MUInt32 inLen, MInt
 
 MFloat Limiter(LPFILTERINFO pFilter, MFloat inData)
 {
+    if (pFilter == NULL)
+        return inData;
     MFloat out = inData;
     if (out > LIMITER_THRESHHOLD) {
         out = LIMITER_THRESHHOLD;
