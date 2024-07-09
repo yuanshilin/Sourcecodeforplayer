@@ -1,8 +1,8 @@
 
-NDK=/Applications/android-ndk-r20b
+NDK=/Applications/AndroidNDK11579264.app/Contents/NDK
 TOOLCHAIN=$(NDK)/toolchains/llvm/prebuilt/darwin-x86_64
 
-API:=24
+API:=31
 ifeq ($(APP_ABI), arm64-v8a)
 CC=$(TOOLCHAIN)/bin/aarch64-linux-android$(API)-clang
 CXX=$(TOOLCHAIN)/bin/aarch64-linux-android$(API)-clang++

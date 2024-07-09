@@ -18,6 +18,10 @@ mkdir -p $WORKSPACE/delivery/Filter/lib/Android
 for APP_ABI in ${APP_ABIs}
 do
 mkdir -p $WORKSPACE/delivery/Filter/lib/Android/${APP_ABI}
+cd $WORKSPACE/dependency/makefile/android
+make clean
+make APP_ABI=${APP_ABI}
+
 cd $WORKSPACE/makefile/android
 make -f makefile_so clean
 make -f makefile_so APP_ABI=${APP_ABI}
