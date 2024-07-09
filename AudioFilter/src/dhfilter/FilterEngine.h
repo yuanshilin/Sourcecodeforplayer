@@ -33,18 +33,18 @@ typedef enum
 typedef struct AudioParam
 {
     MInt32  freq;           //  采样率
-    MUInt16 format;    //  数据格式（只支持16或32）
-    MUInt16 samples;   //  一块音频数据的采样点数
-    MUInt8  channels;  //  声道数
+    MUInt16 bitDepth;       //  位深（只支持16或32）
+    MUInt16 samples;        //  一块音频数据的采样点数
+    MUInt8  channels;       //  声道数
 }AudioParam;
 
 typedef struct EqulizerParam
 {
     Filter_Type type;                   // 滤波器类型
-    MUInt32    centre_freq;            // 滤波中心频率
-    MFloat       dbgain;                 // 增益
-    MFloat       quality_factor;         // 品质因子
-    MUInt16    enabled_channel_bit;    /*  需要滤波的声道位置，最多支持16声道，
+    MUInt32     centre_freq;            // 滤波中心频率
+    MFloat      dbgain;                 // 增益
+    MFloat      quality_factor;         // 品质因子
+    MUInt16     enabled_channel_bit;    /*  需要滤波的声道位置，最多支持16声道，
                                             例如0b1010101011100011，
                                             从低位到高位依次表示第1、2、3...16位的声道是否需要滤波，
                                             值为1表示该声道需要滤波，值为0表示该声道不需要滤波，

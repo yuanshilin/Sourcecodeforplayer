@@ -222,11 +222,11 @@ static LPFILTERINFO InitFilter(AudioParam *aParam, EqulizerParam* param)
     filter->type.fl = param->centre_freq; // 中心频率为1Hz
     filter->q = param->quality_factor; // 品质因子为1，对中心频率信号滤波效果最佳
     filter->dbgain = param->dbgain;
-    filter->sampleSize = aParam->format & 0xFF;
+    filter->sampleSize = aParam->bitDepth & 0xFF;
     filter->channels = aParam->channels;
     filter->enabled_channel_bit = param->enabled_channel_bit;
     Init_Filter(filter);
-    return filter;
+    return filter; 
 }
 
 static MVoid ReleaseDelayProcessor(LPFilterEngine fEngine)
