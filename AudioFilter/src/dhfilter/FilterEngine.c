@@ -165,7 +165,7 @@ static MVoid* ThreadRecvProcess(MVoid* pData)
             do {
                 memset(buffer, 0, RECV_BUFFER_SIZE);
                 MInt64 valread = read( new_socket , buffer, RECV_BUFFER_SIZE);
-                LOGD("valread: %lld, fEngine->bDebug: %d\n", valread, fEngine->bDebug);
+                LOGD("valread: %lld, fEngine->bDebug: %d\n", (long long)valread, fEngine->bDebug);
                 if (valread > 0) {
                     if (buffer[0] == 0x24 && bAppend == 0) {
                         targetLength = (buffer[2] << 8) + buffer[3];
@@ -226,7 +226,7 @@ static LPFILTERINFO InitFilter(AudioParam *aParam, EqulizerParam* param)
     filter->channels = aParam->channels;
     filter->enabled_channel_bit = param->enabled_channel_bit;
     Init_Filter(filter);
-    return filter; 
+    return filter;
 }
 
 static MVoid ReleaseDelayProcessor(LPFilterEngine fEngine)
