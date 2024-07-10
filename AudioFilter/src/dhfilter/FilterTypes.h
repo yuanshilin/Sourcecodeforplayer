@@ -9,6 +9,7 @@
 typedef void				MVoid;
 typedef signed char			MInt8;
 typedef unsigned char		MUInt8;
+typedef const char*         MPCChar;
 typedef signed short		MInt16;
 typedef unsigned short		MUInt16;
 typedef int32_t             MInt32;
@@ -22,6 +23,7 @@ typedef double              MDouble;
 typedef void				MVoid;
 typedef signed char			MInt8;
 typedef unsigned char		MUInt8;
+typedef const char*         MPCChar;
 typedef signed short		MInt16;
 typedef unsigned short		MUInt16;
 typedef signed int          MInt32;

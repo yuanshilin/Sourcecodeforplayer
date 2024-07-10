@@ -42,7 +42,7 @@ typedef struct FilterEngine
 
 static MInt32 HandleReceivedBuffer(FilterEngine* fEngine, MInt8* buffer)
 {
-    cJSON* root = cJSON_Parse((const char*)buffer);
+    cJSON* root = cJSON_Parse((MPCChar)buffer);
     if (!root)
     {
         return -1;
@@ -244,9 +244,9 @@ static MVoid ReleaseDelayProcessor(LPFilterEngine fEngine)
     }
 }
 
-MVoid ReadFromJsonFile(LPFilterEngine fEngine, const MInt8* filepath)
+MVoid ReadFromJsonFile(LPFilterEngine fEngine, MPCChar filepath)
 {
-    FILE* fp = fopen((const char *)filepath, "r");
+    FILE* fp = fopen(filepath, "r");
     if (fp) {
         fseek(fp, 0, SEEK_END);
         MInt64 length = ftell(fp);
@@ -293,7 +293,7 @@ MVoid DestroyFilterEngine(MVoid* pEngine)
     }
 }
 
-MVoid StartFilterEngine(MVoid* pEngine, AudioParam* aParam, const MInt8* configFile)
+MVoid StartFilterEngine(MVoid* pEngine, AudioParam* aParam, MPCChar configFile)
 {
     if (pEngine == NULL) {
         return;

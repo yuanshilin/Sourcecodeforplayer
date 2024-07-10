@@ -30,6 +30,7 @@ cp -f $WORKSPACE/dependency/lib/android/${APP_ABI}/libcjson.so $WORKSPACE/delive
 done
 
 cp -f $WORKSPACE/src/dhfilter/FilterEngine.h $WORKSPACE/delivery/Filter/inc
+cp -f $WORKSPACE/src/dhfilter/FilterTypes.h $WORKSPACE/delivery/Filter/inc
 cp -f $WORKSPACE/doc/*.md $WORKSPACE/delivery/Filter/doc
 cp -f $WORKSPACE/doc/*.jpg $WORKSPACE/delivery/Filter/doc
 

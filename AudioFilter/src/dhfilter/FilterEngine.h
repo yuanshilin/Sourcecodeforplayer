@@ -53,7 +53,7 @@ typedef struct EqulizerParam
 
 MVoid CreateFilterEngine(MVoid** pEngine);
 MVoid DestroyFilterEngine(MVoid* pEngine);
-MVoid StartFilterEngine(MVoid* pEngine, AudioParam* aParam, const MInt8* configFile);
+MVoid StartFilterEngine(MVoid* pEngine, AudioParam* aParam, MPCChar configFile);
 MVoid StopFilterEngine(MVoid* pEngine);
 MVoid AddChannelDelays(MVoid* pEngine, const MFloat* channel_delays_ms);
 MVoid AddFilter(MVoid* pEngine, EqulizerParam* eqParam);
