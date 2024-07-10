@@ -34,7 +34,8 @@ typedef struct FilterEngine
     MInt16*     pDelayOut;
     MInt32      filterCount;
     pthread_mutex_t* pFilterMutex;
-    
+    MPChar      configFilePath;
+
     MInt32      bDebug;
     MInt32      socketFD;
     
@@ -53,7 +54,7 @@ static MInt32 HandleReceivedBuffer(FilterEngine* fEngine, MInt8* buffer)
         cJSON_Delete(root);
         return -1;
     }
-    ResetFilter(fEngine);
+    
     MInt32 arraySize = cJSON_GetArraySize(filters);
     for (MInt32 i = 0; i < arraySize; i++)
     {
@@ -172,6 +173,7 @@ static MVoid* ThreadRecvProcess(MVoid* pData)
                         LOGD("target length: %d, 0x%x, 0x%x\n", targetLength, buffer[2], buffer[3]);
                         if (valread == targetLength + 4) {
                             if (fEngine->bDebug) {
+                                ResetFilter(fEngine);
                                 MInt32 ret = HandleReceivedBuffer(fEngine, (MInt8*)buffer + 4);
                                 LOGI("HandleReceivedBuffer ret: %d\n", ret);
                             }
@@ -188,6 +190,7 @@ static MVoid* ThreadRecvProcess(MVoid* pData)
                         stringLength += valread;
                         if (stringLength == targetLength) {
                             if (fEngine->bDebug) {
+                                ResetFilter(fEngine);
                                 MInt32 ret = HandleReceivedBuffer(fEngine, (MInt8*)temp);
                                 LOGI("HandleReceivedBuffer ret: %d\n", ret);
                             }
@@ -308,6 +311,10 @@ MVoid StartFilterEngine(MVoid* pEngine, AudioParam* aParam, MPCChar configFile)
     memset(fEngine->tempbuffer, 0, tempLen);
     
     if (configFile != NULL) {
+        MUInt64 len = strlen(configFile) + 1;
+        fEngine->configFilePath = malloc(len);
+        memset(fEngine->configFilePath, 0, len);
+        strcpy(fEngine->configFilePath, configFile);
         LOGI("config: %s\r\n", configFile);
         ReadFromJsonFile(fEngine, configFile);
     }
@@ -327,6 +334,10 @@ MVoid StopFilterEngine(MVoid* pEngine)
     
     ReleaseDelayProcessor(fEngine);
     
+    if (fEngine->configFilePath) {
+        free(fEngine->configFilePath);
+        fEngine->configFilePath = NULL;
+    }
     ResetFilter(fEngine);
     if (fEngine->tempbuffer) {
         free(fEngine->tempbuffer);
@@ -386,6 +397,10 @@ MVoid ResetFilter(MVoid* pEngine)
     }
     fEngine->filterCount = 0;
     pthread_mutex_unlock(fEngine->pFilterMutex);
+
+    if (fEngine->configFilePath != NULL) {
+        ReadFromJsonFile(fEngine, fEngine->configFilePath);
+    }
 }
 
 MInt8* FilterAudio(MVoid* pEngine, MInt8* inData, MUInt32 inLen)
