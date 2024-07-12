@@ -222,12 +222,12 @@ void pull_audio_data(void *userdata,
         SDL_memcpy(&self->audioSpec, &spec, sizeof(audioSpec));
         
         AudioParam param = {0};
-        param.format = spec.format;
+        param.bitDepth = spec.format;
         param.channels = spec.channels;
         param.freq = spec.freq;
         param.samples = spec.samples;
         
-        NSString* configFile = @"/Users/develop/Downloads/test/filter.json";
+        NSString* configFile = @"/Users/develop/Downloads/1.json";
         
         bool b = [[NSFileManager defaultManager] isReadableFileAtPath:configFile];
         
@@ -325,7 +325,7 @@ void pull_audio_data(void *userdata,
     NSSlider* slider = sender;
     NSLog(@"[%s] %d: %d", __FUNCTION__, (int)slider.tag, slider.intValue);
     
-    EqulizerParam param = {0};
+    EqulizerParam param;
     Filter_Type type = Filter_Type_BYPASS;
     if (slider.intValue > 0) {
         type = Filter_Type_2ND_PEAK;

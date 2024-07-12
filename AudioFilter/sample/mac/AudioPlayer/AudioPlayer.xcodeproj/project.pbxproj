@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA224DFC2B96FF940054A8E2 /* FilterEngine.c in Sources */ = {isa = PBXBuildFile; fileRef = BA224DF42B96FF930054A8E2 /* FilterEngine.c */; };
+		BA224DFC2B96FF940054A8E2 /* FilterEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA224DF42B96FF930054A8E2 /* FilterEngine.cpp */; };
 		BA224DFD2B96FF940054A8E2 /* equalizer_custom.c in Sources */ = {isa = PBXBuildFile; fileRef = BA224DF72B96FF930054A8E2 /* equalizer_custom.c */; };
 		BA224DFE2B96FF940054A8E2 /* cJSON_Utils.c in Sources */ = {isa = PBXBuildFile; fileRef = BA224DF82B96FF930054A8E2 /* cJSON_Utils.c */; };
 		BA224DFF2B96FF940054A8E2 /* cJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = BA224DFB2B96FF930054A8E2 /* cJSON.c */; };
 		BA5D86AE2BCCC3450070AC52 /* delay_processor.c in Sources */ = {isa = PBXBuildFile; fileRef = BA5D86AC2BCCC3450070AC52 /* delay_processor.c */; };
 		BA77D4C92C11A11F0074A597 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BA77D4C82C11A11F0074A597 /* libSDL2-2.0.0.dylib */; };
+		BA77D4CD2C1974380074A597 /* libSDL2-2.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = BA77D4C82C11A11F0074A597 /* libSDL2-2.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BA780A5B2B70D511002566CB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BA780A5A2B70D511002566CB /* AppDelegate.m */; };
-		BA780A5E2B70D511002566CB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA780A5D2B70D511002566CB /* ViewController.m */; };
+		BA780A5E2B70D511002566CB /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BA780A5D2B70D511002566CB /* ViewController.mm */; };
 		BA780A602B70D512002566CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA780A5F2B70D512002566CB /* Assets.xcassets */; };
 		BA780A632B70D512002566CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA780A612B70D512002566CB /* Main.storyboard */; };
 		BA780A652B70D512002566CB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA780A642B70D512002566CB /* main.m */; };
@@ -48,6 +49,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				BA77D4CD2C1974380074A597 /* libSDL2-2.0.0.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -55,7 +57,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BA224DF42B96FF930054A8E2 /* FilterEngine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = FilterEngine.c; path = ../../../../../src/dhfilter/FilterEngine.c; sourceTree = "<group>"; };
+		BA224DF42B96FF930054A8E2 /* FilterEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FilterEngine.cpp; path = ../../../../../src/dhfilter/FilterEngine.cpp; sourceTree = "<group>"; };
 		BA224DF52B96FF930054A8E2 /* equalizer_custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = equalizer_custom.h; path = ../../../../../src/dhfilter/equalizer_custom.h; sourceTree = "<group>"; };
 		BA224DF62B96FF930054A8E2 /* cJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cJSON.h; path = ../../../../../dependency/src/cjson/cJSON.h; sourceTree = "<group>"; };
 		BA224DF72B96FF930054A8E2 /* equalizer_custom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = equalizer_custom.c; path = ../../../../../src/dhfilter/equalizer_custom.c; sourceTree = "<group>"; };
@@ -70,7 +72,7 @@
 		BA780A592B70D511002566CB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BA780A5A2B70D511002566CB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		BA780A5C2B70D511002566CB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		BA780A5D2B70D511002566CB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		BA780A5D2B70D511002566CB /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		BA780A5F2B70D512002566CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA780A622B70D512002566CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BA780A642B70D512002566CB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -121,7 +123,7 @@
 				BA224DF62B96FF930054A8E2 /* cJSON.h */,
 				BA224DF72B96FF930054A8E2 /* equalizer_custom.c */,
 				BA224DF52B96FF930054A8E2 /* equalizer_custom.h */,
-				BA224DF42B96FF930054A8E2 /* FilterEngine.c */,
+				BA224DF42B96FF930054A8E2 /* FilterEngine.cpp */,
 				BA224DFA2B96FF930054A8E2 /* FilterEngine.h */,
 			);
 			path = dhfilter;
@@ -155,7 +157,7 @@
 				BA780A592B70D511002566CB /* AppDelegate.h */,
 				BA780A5A2B70D511002566CB /* AppDelegate.m */,
 				BA780A5C2B70D511002566CB /* ViewController.h */,
-				BA780A5D2B70D511002566CB /* ViewController.m */,
+				BA780A5D2B70D511002566CB /* ViewController.mm */,
 				BA780A5F2B70D512002566CB /* Assets.xcassets */,
 				BA780A612B70D512002566CB /* Main.storyboard */,
 				BA780A642B70D512002566CB /* main.m */,
@@ -321,10 +323,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA5D86AE2BCCC3450070AC52 /* delay_processor.c in Sources */,
-				BA780A5E2B70D511002566CB /* ViewController.m in Sources */,
+				BA780A5E2B70D511002566CB /* ViewController.mm in Sources */,
 				BA780A652B70D512002566CB /* main.m in Sources */,
 				BA780A5B2B70D511002566CB /* AppDelegate.m in Sources */,
-				BA224DFC2B96FF940054A8E2 /* FilterEngine.c in Sources */,
+				BA224DFC2B96FF940054A8E2 /* FilterEngine.cpp in Sources */,
 				BA224DFF2B96FF940054A8E2 /* cJSON.c in Sources */,
 				BA224DFD2B96FF940054A8E2 /* equalizer_custom.c in Sources */,
 				BA224DFE2B96FF940054A8E2 /* cJSON_Utils.c in Sources */,

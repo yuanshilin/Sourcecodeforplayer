@@ -29,7 +29,9 @@ $(TARGET):$(OBJ)
 	$(CC) -shared -Wall -g -o  $(TARGET) $(OBJ) $(DEP_LIB);
 %.o:%.c
 	$(CC) -DDEBUG -Wall -g -fPIC -std=c99 $(INCLUDE) -o $@ -c $<
-	
+%.o:%.cpp
+	$(CXX) -DDEBUG -Wall -g -fPIC -std=c++11 $(INCLUDE) -o $@ -c $<
+
 .PHONY:clean
 clean:
 	-rm -f $(OBJ) $(TARGET)

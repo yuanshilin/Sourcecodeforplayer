@@ -8,6 +8,10 @@
 #ifndef equalizer_h
 #define equalizer_h
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdio.h>
 #include <math.h>
 #include "FilterTypes.h"
@@ -37,5 +41,9 @@ typedef struct
 MVoid Init_Filter(LPFILTERINFO pFilter);
 MUInt32 FilterAudioData(LPFILTERINFO pFilter, MInt8* inData, MUInt32 inLen, MInt8* outData);
 MFloat Limiter(LPFILTERINFO pFilter, MFloat inData);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* equalizer_h */
