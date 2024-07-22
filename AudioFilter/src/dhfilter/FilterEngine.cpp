@@ -19,6 +19,7 @@
 #include <errno.h>
 #include <pthread.h>
 #include <map>
+#include <string>
 
 #define PORT 37686
 #define TRUE    1

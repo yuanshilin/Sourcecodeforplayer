@@ -16,8 +16,9 @@ endif
 
 SRC_DIRS=../../src/dhfilter
 SRC=$(foreach TMP_SRC_DIRS, $(SRC_DIRS), $(wildcard $(TMP_SRC_DIRS)/*.c))
+SRC_CXX=$(foreach TMP_SRC_DIRS, $(SRC_DIRS), $(wildcard $(TMP_SRC_DIRS)/*.cpp))
 TARGET=../../output/android/$(APP_ABI)/libdhfilter.so
-OBJ:=$(SRC:.c=.o)
+OBJ:=$(SRC:.c=.o) $(SRC_CXX:.cpp=.o)
 
 INC_EXTERN=-I../../src/dhfilter -I../../dependency/src/cjson
 LIB_EXTERN=-L../../dependency/lib/android/$(APP_ABI)
@@ -26,7 +27,7 @@ DEP_LIB=-lcjson   $(LIB_EXTERN)
 
 all: $(TARGET)
 $(TARGET):$(OBJ)
-	$(CC) -shared -Wall -g -o  $(TARGET) $(OBJ) $(DEP_LIB);
+	$(CXX) -shared -Wall -g -o  $(TARGET) $(OBJ) $(DEP_LIB);
 %.o:%.c
 	$(CC) -DDEBUG -Wall -g -fPIC -std=c99 $(INCLUDE) -o $@ -c $<
 %.o:%.cpp
