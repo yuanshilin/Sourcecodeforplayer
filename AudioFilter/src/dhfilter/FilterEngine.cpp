@@ -211,6 +211,11 @@ static MVoid* ThreadRecvProcess(MVoid* pData) {
         }
     }
     LOGI("thread end\r\n");
+    if (fEngine->socketFD > 0) {
+        LOGI("close socket: %d\r\n", fEngine->socketFD);
+        close(fEngine->socketFD);
+        fEngine->socketFD = 0;
+    }
     return 0;
 }
 
@@ -543,8 +548,4 @@ MVoid StopDebug(MVoid* pEngine) {
          fEngine->socketFD);
     
     fEngine->bDebug = FALSE;
-    if (fEngine->socketFD > 0) {
-        close(fEngine->socketFD);
-        fEngine->socketFD = 0;
-    }
 }
