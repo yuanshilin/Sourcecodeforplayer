@@ -46,6 +46,7 @@ typedef struct FilterEngine {
     
     MInt32 bDebug;
     MInt32 socketFD;
+    MInt32 bCanDestroy;
     
 } FilterEngine, *LPFilterEngine;
 
@@ -122,6 +123,7 @@ static MVoid* ThreadRecvProcess(MVoid* pData) {
     FilterEngine* fEngine = (FilterEngine*)pData;
     
     fEngine->bDebug = TRUE;
+    fEngine->bCanDestroy = FALSE;
     
     struct sockaddr_in address_client;
     struct timeval timeout;
@@ -213,12 +215,13 @@ static MVoid* ThreadRecvProcess(MVoid* pData) {
             close(new_socket);
         }
     }
-    LOGI("thread end\r\n");
+    LOGI("thread end, socketfd: %d\r\n", fEngine->socketFD);
     if (fEngine->socketFD > 0) {
         LOGI("close socket: %d\r\n", fEngine->socketFD);
         close(fEngine->socketFD);
         fEngine->socketFD = 0;
     }
+    fEngine->bCanDestroy = TRUE;
     return 0;
 }
 
@@ -297,11 +300,13 @@ MVoid CreateFilterEngine(MVoid** pEngine) {
     pthread_mutexattr_destroy(&attr);
     
     engine->pFilters = new FilterMap();
+    engine->bCanDestroy = TRUE;
     
     *pEngine = engine;
 }
 
 MVoid DestroyFilterEngine(MVoid* pEngine) {
+    LOGI("DestroyFilterEngine In\r\n");
     if (pEngine) {
         LPFilterEngine fEngine = (LPFilterEngine)pEngine;
         
@@ -314,9 +319,14 @@ MVoid DestroyFilterEngine(MVoid* pEngine) {
             delete fEngine->pFilterMutex;
             fEngine->pFilterMutex = nullptr;
         }
+        while (fEngine->bCanDestroy == FALSE) {
+            usleep(10*1000);
+        }
         free(fEngine);
         fEngine = nullptr;
     }
+    LOGI("DestroyFilterEngine out\r\n");
+
 }
 
 MVoid StartFilterEngine(MVoid* pEngine, AudioParam* aParam,

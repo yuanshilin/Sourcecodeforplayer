@@ -23,6 +23,7 @@
 		BA780A7A2B70D512002566CB /* AudioPlayerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA780A792B70D512002566CB /* AudioPlayerUITests.m */; };
 		BA780A7C2B70D512002566CB /* AudioPlayerUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA780A7B2B70D512002566CB /* AudioPlayerUITestsLaunchTests.m */; };
 		BA780A8A2B70DB44002566CB /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA780A892B70DB44002566CB /* libSDL2.a */; };
+		BA7E67CB2C50A200006E1FCE /* Filter_Version.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA7E67CA2C50A200006E1FCE /* Filter_Version.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		BA780A792B70D512002566CB /* AudioPlayerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioPlayerUITests.m; sourceTree = "<group>"; };
 		BA780A7B2B70D512002566CB /* AudioPlayerUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioPlayerUITestsLaunchTests.m; sourceTree = "<group>"; };
 		BA780A892B70DB44002566CB /* libSDL2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2.a; path = ../../../../../../opt/homebrew/Cellar/sdl2/2.28.5/lib/libSDL2.a; sourceTree = "<group>"; };
+		BA7E67CA2C50A200006E1FCE /* Filter_Version.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Filter_Version.cpp; path = ../../../../../src/dhfilter/Filter_Version.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 		BA224DF32B96FF5D0054A8E2 /* dhfilter */ = {
 			isa = PBXGroup;
 			children = (
+				BA7E67CA2C50A200006E1FCE /* Filter_Version.cpp */,
 				BA5D86AC2BCCC3450070AC52 /* delay_processor.c */,
 				BA5D86AD2BCCC3450070AC52 /* delay_processor.h */,
 				BA224DF82B96FF930054A8E2 /* cJSON_Utils.c */,
@@ -322,6 +325,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA7E67CB2C50A200006E1FCE /* Filter_Version.cpp in Sources */,
 				BA5D86AE2BCCC3450070AC52 /* delay_processor.c in Sources */,
 				BA780A5E2B70D511002566CB /* ViewController.mm in Sources */,
 				BA780A652B70D512002566CB /* main.m in Sources */,
