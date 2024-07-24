@@ -29,6 +29,9 @@
 #define FALSE 0
 
 #define RECV_BUFFER_SIZE 10 * 1024
+
+extern const char* ARCVIDEO_AUDIOFILTER_LIB_VERSION;
+
 typedef std::map<std::string, LPFILTERINFO> FilterMap;
 
 typedef struct FilterEngine {
@@ -278,6 +281,7 @@ MVoid ReadFromJsonFile(LPFilterEngine fEngine, MPCChar filepath) {
 }
 
 MVoid CreateFilterEngine(MVoid** pEngine) {
+    LOGI("CreateFilterEngine version: %s\r\n", ARCVIDEO_AUDIOFILTER_LIB_VERSION);
     LPFilterEngine engine = (LPFilterEngine)malloc(sizeof(FilterEngine));
     memset(engine, 0, sizeof(FilterEngine));
     

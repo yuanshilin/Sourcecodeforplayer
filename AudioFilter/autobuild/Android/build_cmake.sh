@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ANDROID_NDK=/Applications/AndroidNDK11579264.app/Contents/NDK
 
@@ -9,6 +9,13 @@ WORKSPACE=$(cd "$dirname "$0")";pwd)
 REVISION=$(git log --format="%h" -n 1 )
 BUILD_ID=`date +%Y%m%d`
 APP_ABIs="arm64-v8a armeabi-v7a"
+
+#modify revision
+cd $WORKSPACE/src/dhfilter
+echo "//this cpp define a null function for audiofilter version info." > Filter_Version.cpp
+echo -n "const char* ARCVIDEO_AUDIOFILTER_LIB_VERSION = \"" >> Filter_Version.cpp
+echo -n ${REVISION} >> Filter_Version.cpp
+echo "\";" >> Filter_Version.cpp
 
 mkdir -p $WORKSPACE/delivery
 mkdir -p $WORKSPACE/delivery/Filter
